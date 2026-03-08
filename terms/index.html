@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Memoires</title>
+  <meta name="description" content="Memoires Terms of Service. Understand the terms governing your use of the Memoires journal app.">
+  <meta name="theme-color" content="#D4A574">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --amber: #D4A574;
+      --amber-light: #E8C9A0;
+      --amber-dark: #B8875A;
+      --cream: #FBF7F0;
+      --warm-white: #F5EDE3;
+      --linen: #EDE4D8;
+      --parchment: #E8DFD3;
+      --ink: #2C2520;
+      --charcoal: #4A4440;
+      --stone: #7A7470;
+      --foggy: #A9A4A0;
+      --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+      --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* Nav */
+    nav {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(251, 247, 240, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--amber); }
+    .nav-back {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--stone);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-back:hover { color: var(--ink); }
+
+    /* Content */
+    .legal-header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px 40px;
+      border-bottom: 1px solid var(--linen);
+    }
+    .legal-header h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .legal-header p {
+      font-size: 0.95rem;
+      color: var(--stone);
+    }
+
+    .legal-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 120px;
+    }
+    .legal-content h2 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-top: 48px;
+      margin-bottom: 16px;
+    }
+    .legal-content h2:first-child { margin-top: 0; }
+    .legal-content h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+    .legal-content p {
+      font-size: 0.95rem;
+      color: var(--charcoal);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .legal-content ul, .legal-content ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+    .legal-content li {
+      font-size: 0.95rem;
+      color: var(--charcoal);
+      line-height: 1.75;
+      margin-bottom: 8px;
+    }
+    .legal-content a {
+      color: var(--amber-dark);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .legal-content a:hover { color: var(--amber); }
+    .legal-content strong { font-weight: 600; color: var(--ink); }
+
+    /* Footer */
+    footer {
+      background: var(--ink);
+      color: rgba(251, 247, 240, 0.5);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    footer a {
+      color: rgba(251, 247, 240, 0.55);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    footer a:hover { color: var(--amber-light); }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+      font-size: 0.88rem;
+    }
+    .footer-copy { font-size: 0.8rem; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .legal-header { padding: 60px 20px 32px; }
+      .legal-content { padding: 36px 20px 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Memoire<span>s</span></a>
+    <a href="/" class="nav-back">&larr; Back to home</a>
+  </nav>
+
+  <div class="legal-header">
+    <h1>Terms of Service</h1>
+    <p>Last updated: March 9, 2026</p>
+  </div>
+
+  <div class="legal-content">
+    <h2>Agreement to Terms</h2>
+    <p>By downloading, installing, or using Memoires ("the App"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the App.</p>
+
+    <h2>Description of Service</h2>
+    <p>Memoires is a personal journal application for iOS that allows you to create, store, and organize journal entries with text, photos, voice dictation, mood tracking, and location tagging. The App stores your data locally on your device and optionally syncs through your personal iCloud account.</p>
+
+    <h2>Subscription Plans</h2>
+
+    <h3>Free Plan</h3>
+    <p>The free plan allows you to create and store up to <strong>10 journal entries</strong> (memories). All core features are available, including text editing, voice dictation, photo attachments, mood tracking, and location tagging.</p>
+
+    <h3>Unlimited Plan</h3>
+    <p>The Unlimited plan removes the memory limit and provides access to additional features. The Unlimited plan is available at the following prices:</p>
+    <ul>
+      <li><strong>Monthly:</strong> $2.99 per month</li>
+      <li><strong>Annual:</strong> $19.99 per year (save 44%)</li>
+    </ul>
+    <p>Prices are in US dollars and may vary by region based on App Store pricing. Prices are subject to change, but any changes will not affect active subscription periods.</p>
+
+    <h3>Subscription Management</h3>
+    <p>Subscriptions are managed through the Apple App Store. By subscribing, you agree to Apple's terms for in-app purchases and subscriptions:</p>
+    <ul>
+      <li>Payment is charged to your Apple ID account at confirmation of purchase</li>
+      <li>Subscriptions automatically renew unless auto-renewal is turned off at least 24 hours before the end of the current period</li>
+      <li>Your account is charged for renewal within 24 hours prior to the end of the current period</li>
+      <li>You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase</li>
+      <li>No refunds are provided for the unused portion of a subscription period</li>
+    </ul>
+
+    <h3>Free Trial</h3>
+    <p>If a free trial is offered, it will automatically convert to a paid subscription at the end of the trial period unless you cancel before the trial ends. Any unused portion of a free trial period is forfeited when you purchase a subscription.</p>
+
+    <h2>Your Content</h2>
+    <p><strong>You own your content.</strong> All journal entries, photos, and other content you create within the App remain your property. Memoires does not claim any ownership rights over your content.</p>
+    <p>We do not access, read, analyze, or use your content for any purpose other than providing the App's functionality on your device. Your content is stored locally and, if you choose, in your personal iCloud account.</p>
+
+    <h2>Acceptable Use</h2>
+    <p>You agree to use the App in accordance with all applicable laws and regulations. You agree not to:</p>
+    <ul>
+      <li>Use the App for any unlawful purpose</li>
+      <li>Attempt to reverse engineer, decompile, or disassemble the App</li>
+      <li>Attempt to gain unauthorized access to the App's systems or infrastructure</li>
+      <li>Use the App to infringe upon the intellectual property rights of others</li>
+      <li>Distribute, share, or resell the App or your subscription in violation of Apple's terms</li>
+    </ul>
+
+    <h2>Intellectual Property</h2>
+    <p>The App, including its design, code, features, and branding, is owned by Memoires and protected by copyright, trademark, and other intellectual property laws. You are granted a limited, non-exclusive, non-transferable license to use the App on your personal devices in accordance with these Terms and the Apple App Store terms.</p>
+
+    <h2>Disclaimer of Warranties</h2>
+    <p>The App is provided "as is" and "as available" without warranties of any kind, either express or implied. We do not warrant that the App will be uninterrupted, error-free, or free of harmful components. To the maximum extent permitted by applicable law, we disclaim all warranties, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+
+    <h2>Limitation of Liability</h2>
+    <p>To the maximum extent permitted by applicable law, Memoires and its developers shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of data, loss of profits, or loss of goodwill, arising out of or in connection with your use of the App.</p>
+    <p>Our total liability for any claims arising from or related to the App shall not exceed the amount you paid for the App or subscription in the twelve (12) months preceding the claim.</p>
+
+    <h2>Data Loss</h2>
+    <p>While we design the App to reliably store your data, we are not responsible for any data loss resulting from device failure, software bugs, operating system updates, iCloud service disruptions, or any other circumstances. We strongly recommend maintaining regular backups of your device through iCloud or iTunes.</p>
+
+    <h2>Changes to the App</h2>
+    <p>We may update, modify, or discontinue features of the App at any time. We will make reasonable efforts to maintain backward compatibility and preserve your data through updates.</p>
+
+    <h2>Changes to These Terms</h2>
+    <p>We may update these Terms from time to time. Any changes will be reflected on this page with an updated effective date. Continued use of the App after changes constitutes acceptance of the revised Terms.</p>
+
+    <h2>Termination</h2>
+    <p>You may stop using the App at any time by uninstalling it from your device. We reserve the right to terminate or restrict your access to the App if you violate these Terms.</p>
+
+    <h2>Governing Law</h2>
+    <p>These Terms are governed by and construed in accordance with the laws of the jurisdiction in which the developer resides, without regard to conflict of law principles.</p>
+
+    <h2>Contact Us</h2>
+    <p>If you have any questions about these Terms of Service, please contact us at:</p>
+    <p><a href="mailto:support@memoires.app">support@memoires.app</a></p>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
+    <div class="footer-copy">&copy; 2025 Memoires. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
