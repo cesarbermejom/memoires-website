@@ -338,17 +338,87 @@
       opacity: 1;
       transform: scale(0.92) translateY(-8px);
     }
+    .screenshot-frame {
+      cursor: pointer;
+    }
     .screenshot-frame img {
       width: 100%;
       height: auto;
       display: block;
     }
-    .screenshot-label {
-      text-align: center;
-      font-size: 0.82rem;
-      color: var(--foggy);
-      margin-top: 12px;
-      font-weight: 500;
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(44, 37, 32, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .lightbox img {
+      max-height: 90vh;
+      max-width: 420px;
+      width: auto;
+      border-radius: 32px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+      transform: scale(0.92);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .lightbox.active img {
+      transform: scale(1);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      width: 40px;
+      height: 40px;
+      background: rgba(251, 247, 240, 0.12);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    .lightbox-close:hover { background: rgba(251, 247, 240, 0.2); }
+    .lightbox-close svg { width: 18px; height: 18px; color: var(--cream); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(251, 247, 240, 0.12);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    .lightbox-nav:hover { background: rgba(251, 247, 240, 0.2); }
+    .lightbox-nav svg { width: 20px; height: 20px; color: var(--cream); }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+
+    @media (max-width: 768px) {
+      .lightbox img { max-width: 85vw; border-radius: 24px; }
+      .lightbox-nav { display: none; }
     }
 
     /* ---- SECTION SHARED ---- */
@@ -932,6 +1002,20 @@
     </div>
   </footer>
 
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <img src="" alt="Screenshot preview">
+    <button class="lightbox-nav lightbox-next" aria-label="Next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
+  </div>
+
   <script>
     // Nav scroll effect
     const nav = document.getElementById('navbar');
@@ -959,6 +1043,46 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const screenshots = Array.from(document.querySelectorAll('.screenshot-frame img'));
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = screenshots[index].src;
+      lightboxImg.alt = screenshots[index].alt;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigateLightbox(dir) {
+      currentIndex = (currentIndex + dir + screenshots.length) % screenshots.length;
+      lightboxImg.src = screenshots[currentIndex].src;
+      lightboxImg.alt = screenshots[currentIndex].alt;
+    }
+
+    screenshots.forEach((img, i) => {
+      img.closest('.screenshot-frame').addEventListener('click', () => openLightbox(i));
+    });
+
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
+    lightbox.querySelector('.lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
   </script>
 </body>
 </html>
