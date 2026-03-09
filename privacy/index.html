@@ -69,8 +69,16 @@
       color: var(--ink);
       text-decoration: none;
       letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .nav-logo span { color: var(--amber); }
+    .nav-logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+
     .nav-back {
       font-size: 0.9rem;
       font-weight: 500;
@@ -150,8 +158,7 @@
     footer {
       background: var(--ink);
       color: rgba(251, 247, 240, 0.5);
-      padding: 40px 24px;
-      text-align: center;
+      padding: 64px 24px 40px;
     }
     footer a {
       color: rgba(251, 247, 240, 0.55);
@@ -159,26 +166,65 @@
       transition: color 0.3s;
     }
     footer a:hover { color: var(--amber-light); }
-    .footer-links {
+    .footer-content {
+      max-width: 1120px;
+      margin: 0 auto;
       display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 16px;
-      font-size: 0.88rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
     }
-    .footer-copy { font-size: 0.8rem; }
+    .footer-brand .nav-logo { color: var(--cream); }
+    .footer-tagline {
+      font-size: 0.88rem;
+      color: rgba(251, 247, 240, 0.4);
+      margin-top: 8px;
+      max-width: 260px;
+    }
+    .footer-links-group h4 {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(251, 247, 240, 0.3);
+      margin-bottom: 16px;
+    }
+    .footer-links-group a {
+      display: block;
+      font-size: 0.88rem;
+      color: rgba(251, 247, 240, 0.55);
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
+    .footer-links-group a:hover { color: var(--amber-light); }
+    .footer-bottom {
+      max-width: 1120px;
+      margin: 48px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(251, 247, 240, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.8rem;
+    }
 
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
       .legal-header { padding: 60px 20px 32px; }
       .legal-content { padding: 36px 20px 80px; }
+      .footer-content { flex-direction: column; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="/" class="nav-logo">Memoire<span>s</span></a>
+    <a href="/" class="nav-logo"><img src="../assets/appicon.png" alt="Memoires icon">Memoires</a>
     <a href="/" class="nav-back">&larr; Back to home</a>
   </nav>
 
@@ -262,12 +308,32 @@
   </div>
 
   <footer>
-    <div class="footer-links">
-      <a href="/">Home</a>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms of Service</a>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo"><img src="../assets/appicon.png" alt="Memoires icon">Memoires</a>
+        <p class="footer-tagline">Your life, beautifully written. A journal app crafted with care.</p>
+      </div>
+      <div class="footer-links-group">
+        <h4>Product</h4>
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/#pricing">Pricing</a>
+      </div>
+      <div class="footer-links-group">
+        <h4>Legal</h4>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+      </div>
+      <div class="footer-links-group">
+        <h4>Contact</h4>
+        <a href="mailto:support@memoires.app">Support</a>
+        <a href="mailto:feedback@memoires.app?subject=Feature%20Suggestion%20for%20Memoires">Suggest a Feature</a>
+      </div>
     </div>
-    <div class="footer-copy">&copy; 2025 Memoires. All rights reserved.</div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Memoires. All rights reserved.</span>
+      <span>Made with care for people who remember.</span>
+    </div>
   </footer>
 
 </body>
