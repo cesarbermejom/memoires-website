@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memoires — Your Life, Beautifully Written</title>
-  <meta name="description" content="Memoires is a premium iOS journal app for capturing daily memories through text, voice, and photos. Beautiful, private, and intelligent.">
+  <meta name="description"
+    content="Memoires is a premium iOS journal app for capturing daily memories through text, voice, and photos. Beautiful, private, and intelligent.">
   <meta name="theme-color" content="#D4A574">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <meta property="og:title" content="Memoires — Your Life, Beautifully Written">
-  <meta property="og:description" content="A premium iOS journal app for capturing daily memories through text, voice, and photos.">
+  <meta property="og:description"
+    content="A premium iOS journal app for capturing daily memories through text, voice, and photos.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://memoires.app">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     :root {
       --amber: #D4A574;
@@ -38,7 +49,9 @@
       --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: var(--font-sans);
@@ -66,6 +79,7 @@
       transform: translateY(32px);
       transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
     .fade-up.visible {
       opacity: 1;
       transform: translateY(0);
@@ -84,6 +98,7 @@
       align-items: center;
       transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
     }
+
     nav.scrolled {
       background: rgba(251, 247, 240, 0.92);
       backdrop-filter: blur(16px);
@@ -91,6 +106,7 @@
       box-shadow: 0 1px 0 rgba(212, 165, 116, 0.15);
       padding: 14px 40px;
     }
+
     .nav-logo {
       font-family: var(--font-serif);
       font-size: 1.6rem;
@@ -102,12 +118,19 @@
       align-items: center;
       gap: 10px;
     }
+
     .nav-logo img {
       width: 36px;
       height: 36px;
       border-radius: 8px;
     }
-    .nav-links { display: flex; gap: 32px; align-items: center; }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
     .nav-links a {
       font-size: 0.9rem;
       font-weight: 500;
@@ -115,7 +138,11 @@
       text-decoration: none;
       transition: color 0.3s;
     }
-    .nav-links a:hover { color: var(--ink); }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
     .nav-cta {
       background: var(--ink) !important;
       color: var(--cream) !important;
@@ -125,7 +152,10 @@
       font-weight: 500 !important;
       transition: background 0.3s !important;
     }
-    .nav-cta:hover { background: var(--charcoal) !important; }
+
+    .nav-cta:hover {
+      background: var(--charcoal) !important;
+    }
 
     .nav-mobile-toggle {
       display: none;
@@ -136,6 +166,7 @@
       height: 32px;
       position: relative;
     }
+
     .nav-mobile-toggle span {
       display: block;
       width: 22px;
@@ -145,9 +176,18 @@
       left: 5px;
       transition: all 0.3s;
     }
-    .nav-mobile-toggle span:nth-child(1) { top: 9px; }
-    .nav-mobile-toggle span:nth-child(2) { top: 15px; }
-    .nav-mobile-toggle span:nth-child(3) { top: 21px; }
+
+    .nav-mobile-toggle span:nth-child(1) {
+      top: 9px;
+    }
+
+    .nav-mobile-toggle span:nth-child(2) {
+      top: 15px;
+    }
+
+    .nav-mobile-toggle span:nth-child(3) {
+      top: 21px;
+    }
 
     /* ---- HERO ---- */
     .hero {
@@ -161,6 +201,7 @@
       position: relative;
       overflow: hidden;
     }
+
     .hero::before {
       content: '';
       position: absolute;
@@ -172,6 +213,7 @@
       border-radius: 50%;
       pointer-events: none;
     }
+
     .hero::after {
       content: '';
       position: absolute;
@@ -198,23 +240,48 @@
       margin-bottom: 40px;
       animation: fadeDown 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
+
     .hero-badge .dot {
-      width: 6px; height: 6px;
+      width: 6px;
+      height: 6px;
       background: var(--success);
       border-radius: 50%;
     }
 
     @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-16px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     @keyframes scaleIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .hero h1 {
@@ -227,10 +294,12 @@
       max-width: 800px;
       animation: fadeUp 0.8s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
+
     .hero h1 em {
       font-style: italic;
       color: var(--amber);
     }
+
     .hero p {
       font-size: clamp(1.05rem, 2vw, 1.25rem);
       color: var(--stone);
@@ -239,6 +308,7 @@
       line-height: 1.7;
       animation: fadeUp 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
+
     .hero-actions {
       margin-top: 48px;
       display: flex;
@@ -248,6 +318,7 @@
       justify-content: center;
       animation: fadeUp 0.8s 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
+
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -264,12 +335,18 @@
       cursor: pointer;
       transition: all 0.3s;
     }
+
     .btn-primary:hover {
       background: var(--charcoal);
       transform: translateY(-2px);
       box-shadow: 0 8px 32px rgba(44, 37, 32, 0.15);
     }
-    .btn-primary svg { width: 20px; height: 20px; }
+
+    .btn-primary svg {
+      width: 20px;
+      height: 20px;
+    }
+
     .btn-secondary {
       display: inline-flex;
       align-items: center;
@@ -286,6 +363,7 @@
       cursor: pointer;
       transition: all 0.3s;
     }
+
     .btn-secondary:hover {
       border-color: var(--amber-light);
       color: var(--ink);
@@ -307,6 +385,7 @@
       width: 100%;
       max-width: 1120px;
     }
+
     .screenshot-carousel {
       display: flex;
       gap: 24px;
@@ -314,6 +393,7 @@
       align-items: flex-end;
       padding: 0 24px;
     }
+
     .screenshot-frame {
       flex-shrink: 0;
       width: 240px;
@@ -326,24 +406,30 @@
       border: 1px solid rgba(212, 165, 116, 0.12);
       transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
     .screenshot-frame:hover {
       transform: translateY(-8px);
     }
+
     .screenshot-frame.hero-main {
       width: 270px;
       z-index: 2;
     }
+
     .screenshot-frame.hero-side {
       opacity: 0.7;
       transform: scale(0.92);
     }
+
     .screenshot-frame.hero-side:hover {
       opacity: 1;
       transform: scale(0.92) translateY(-8px);
     }
+
     .screenshot-frame {
       cursor: pointer;
     }
+
     .screenshot-frame img {
       width: 100%;
       height: auto;
@@ -366,10 +452,12 @@
       transition: opacity 0.3s ease;
       cursor: pointer;
     }
+
     .lightbox.active {
       opacity: 1;
       pointer-events: auto;
     }
+
     .lightbox img {
       max-height: 90vh;
       max-width: 420px;
@@ -379,9 +467,11 @@
       transform: scale(0.92);
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
     .lightbox.active img {
       transform: scale(1);
     }
+
     .lightbox-close {
       position: absolute;
       top: 24px;
@@ -397,8 +487,17 @@
       justify-content: center;
       transition: background 0.3s;
     }
-    .lightbox-close:hover { background: rgba(251, 247, 240, 0.2); }
-    .lightbox-close svg { width: 18px; height: 18px; color: var(--cream); }
+
+    .lightbox-close:hover {
+      background: rgba(251, 247, 240, 0.2);
+    }
+
+    .lightbox-close svg {
+      width: 18px;
+      height: 18px;
+      color: var(--cream);
+    }
+
     .lightbox-nav {
       position: absolute;
       top: 50%;
@@ -414,19 +513,46 @@
       justify-content: center;
       transition: background 0.3s;
     }
-    .lightbox-nav:hover { background: rgba(251, 247, 240, 0.2); }
-    .lightbox-nav svg { width: 20px; height: 20px; color: var(--cream); }
-    .lightbox-prev { left: 24px; }
-    .lightbox-next { right: 24px; }
+
+    .lightbox-nav:hover {
+      background: rgba(251, 247, 240, 0.2);
+    }
+
+    .lightbox-nav svg {
+      width: 20px;
+      height: 20px;
+      color: var(--cream);
+    }
+
+    .lightbox-prev {
+      left: 24px;
+    }
+
+    .lightbox-next {
+      right: 24px;
+    }
 
     @media (max-width: 768px) {
-      .lightbox img { max-width: 85vw; border-radius: 24px; }
-      .lightbox-nav { display: none; }
+      .lightbox img {
+        max-width: 85vw;
+        border-radius: 24px;
+      }
+
+      .lightbox-nav {
+        display: none;
+      }
     }
 
     /* ---- SECTION SHARED ---- */
-    section { padding: 120px 24px; }
-    .container { max-width: 1120px; margin: 0 auto; }
+    section {
+      padding: 120px 24px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
     .section-label {
       font-size: 0.78rem;
       font-weight: 600;
@@ -435,6 +561,7 @@
       color: var(--amber);
       margin-bottom: 16px;
     }
+
     .section-title {
       font-family: var(--font-serif);
       font-size: clamp(2rem, 4.5vw, 3.2rem);
@@ -444,6 +571,7 @@
       color: var(--ink);
       max-width: 600px;
     }
+
     .section-subtitle {
       font-size: 1.05rem;
       color: var(--stone);
@@ -453,13 +581,20 @@
     }
 
     /* ---- FEATURES ---- */
-    .features { background: var(--cream); }
-    .features-header { margin-bottom: 72px; }
+    .features {
+      background: var(--cream);
+    }
+
+    .features-header {
+      margin-bottom: 72px;
+    }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
+
     .feature-card {
       background: var(--warm-white);
       border: 1px solid rgba(212, 165, 116, 0.1);
@@ -467,11 +602,13 @@
       padding: 36px 32px;
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
     .feature-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 16px 48px rgba(44, 37, 32, 0.06);
       border-color: rgba(212, 165, 116, 0.2);
     }
+
     .feature-icon {
       width: 52px;
       height: 52px;
@@ -482,12 +619,30 @@
       margin-bottom: 24px;
       font-size: 1.4rem;
     }
-    .feature-icon.amber { background: rgba(212, 165, 116, 0.15); }
-    .feature-icon.gold { background: rgba(201, 168, 76, 0.12); }
-    .feature-icon.sage { background: rgba(168, 192, 160, 0.2); }
-    .feature-icon.lavender { background: rgba(184, 168, 208, 0.18); }
-    .feature-icon.rose { background: rgba(212, 160, 160, 0.18); }
-    .feature-icon.slate { background: rgba(136, 152, 184, 0.18); }
+
+    .feature-icon.amber {
+      background: rgba(212, 165, 116, 0.15);
+    }
+
+    .feature-icon.gold {
+      background: rgba(201, 168, 76, 0.12);
+    }
+
+    .feature-icon.sage {
+      background: rgba(168, 192, 160, 0.2);
+    }
+
+    .feature-icon.lavender {
+      background: rgba(184, 168, 208, 0.18);
+    }
+
+    .feature-icon.rose {
+      background: rgba(212, 160, 160, 0.18);
+    }
+
+    .feature-icon.slate {
+      background: rgba(136, 152, 184, 0.18);
+    }
 
     .feature-card h3 {
       font-family: var(--font-serif);
@@ -496,6 +651,7 @@
       color: var(--ink);
       margin-bottom: 10px;
     }
+
     .feature-card p {
       font-size: 0.92rem;
       color: var(--stone);
@@ -509,6 +665,7 @@
       padding: 100px 24px;
       position: relative;
     }
+
     .quote-section::before {
       content: '\201C';
       font-family: var(--font-serif);
@@ -521,6 +678,7 @@
       line-height: 1;
       pointer-events: none;
     }
+
     .quote-text {
       font-family: var(--font-serif);
       font-size: clamp(1.4rem, 3vw, 2rem);
@@ -531,6 +689,7 @@
       margin: 0 auto;
       line-height: 1.5;
     }
+
     .quote-attribution {
       font-size: 0.88rem;
       color: var(--foggy);
@@ -538,13 +697,23 @@
     }
 
     /* ---- PRICING ---- */
-    .pricing { background: var(--cream); }
+    .pricing {
+      background: var(--cream);
+    }
+
     .pricing-header {
       text-align: center;
       margin-bottom: 64px;
     }
-    .pricing-header .section-title { margin: 0 auto; }
-    .pricing-header .section-subtitle { margin: 16px auto 0; }
+
+    .pricing-header .section-title {
+      margin: 0 auto;
+    }
+
+    .pricing-header .section-subtitle {
+      margin: 16px auto 0;
+    }
+
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -552,6 +721,7 @@
       max-width: 740px;
       margin: 0 auto;
     }
+
     .pricing-card {
       background: var(--warm-white);
       border: 1px solid rgba(212, 165, 116, 0.1);
@@ -560,17 +730,28 @@
       position: relative;
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
     .pricing-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 16px 48px rgba(44, 37, 32, 0.06);
     }
+
     .pricing-card.featured {
       background: var(--ink);
       border-color: transparent;
     }
-    .pricing-card.featured * { color: var(--cream); }
-    .pricing-card.featured .pricing-feature { color: rgba(251, 247, 240, 0.65); }
-    .pricing-card.featured .pricing-check { color: var(--amber-light); }
+
+    .pricing-card.featured * {
+      color: var(--cream);
+    }
+
+    .pricing-card.featured .pricing-feature {
+      color: rgba(251, 247, 240, 0.65);
+    }
+
+    .pricing-card.featured .pricing-check {
+      color: var(--amber-light);
+    }
 
     .pricing-badge {
       display: inline-block;
@@ -584,17 +765,20 @@
       border-radius: 100px;
       margin-bottom: 20px;
     }
+
     .pricing-plan {
       font-family: var(--font-serif);
       font-size: 1.6rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
+
     .pricing-desc {
       font-size: 0.88rem;
       color: var(--stone);
       margin-bottom: 28px;
     }
+
     .pricing-price {
       font-family: var(--font-serif);
       font-size: 3rem;
@@ -602,20 +786,27 @@
       line-height: 1;
       margin-bottom: 4px;
     }
+
     .pricing-period {
       font-size: 0.85rem;
       color: var(--stone);
       margin-bottom: 32px;
     }
+
     .pricing-divider {
       height: 1px;
       background: var(--linen);
       margin-bottom: 28px;
     }
+
     .pricing-card.featured .pricing-divider {
       background: rgba(251, 247, 240, 0.1);
     }
-    .pricing-features { list-style: none; }
+
+    .pricing-features {
+      list-style: none;
+    }
+
     .pricing-features li {
       display: flex;
       align-items: flex-start;
@@ -623,8 +814,16 @@
       margin-bottom: 14px;
       font-size: 0.9rem;
     }
-    .pricing-check { color: var(--success); flex-shrink: 0; margin-top: 2px; }
-    .pricing-feature { color: var(--charcoal); }
+
+    .pricing-check {
+      color: var(--success);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .pricing-feature {
+      color: var(--charcoal);
+    }
 
     .pricing-annual {
       text-align: center;
@@ -632,6 +831,7 @@
       font-size: 0.9rem;
       color: var(--stone);
     }
+
     .pricing-annual strong {
       color: var(--amber-dark);
       font-weight: 600;
@@ -642,6 +842,7 @@
       background: var(--cream);
       padding: 80px 24px;
     }
+
     .feedback-card {
       background: var(--warm-white);
       border: 1px solid rgba(212, 165, 116, 0.12);
@@ -651,8 +852,16 @@
       max-width: 640px;
       margin: 0 auto;
     }
-    .feedback-card .section-title { margin: 0 auto; }
-    .feedback-card .section-subtitle { margin: 16px auto 0; max-width: 460px; }
+
+    .feedback-card .section-title {
+      margin: 0 auto;
+    }
+
+    .feedback-card .section-subtitle {
+      margin: 16px auto 0;
+      max-width: 460px;
+    }
+
     .feedback-icon {
       width: 60px;
       height: 60px;
@@ -665,7 +874,9 @@
     }
 
     @media (max-width: 768px) {
-      .feedback-card { padding: 40px 28px; }
+      .feedback-card {
+        padding: 40px 28px;
+      }
     }
 
     /* ---- CTA ---- */
@@ -676,6 +887,7 @@
       position: relative;
       overflow: hidden;
     }
+
     .cta-section::before {
       content: '';
       position: absolute;
@@ -688,10 +900,12 @@
       border-radius: 50%;
       pointer-events: none;
     }
+
     .cta-section .section-title {
       margin: 0 auto 16px;
       max-width: 500px;
     }
+
     .cta-section .section-subtitle {
       margin: 0 auto 40px;
     }
@@ -702,6 +916,7 @@
       color: rgba(251, 247, 240, 0.5);
       padding: 64px 24px 40px;
     }
+
     .footer-content {
       max-width: 1120px;
       margin: 0 auto;
@@ -711,13 +926,18 @@
       flex-wrap: wrap;
       gap: 40px;
     }
-    .footer-brand .nav-logo { color: var(--cream); }
+
+    .footer-brand .nav-logo {
+      color: var(--cream);
+    }
+
     .footer-tagline {
       font-size: 0.88rem;
       color: rgba(251, 247, 240, 0.4);
       margin-top: 8px;
       max-width: 260px;
     }
+
     .footer-links-group h4 {
       font-size: 0.78rem;
       font-weight: 600;
@@ -726,6 +946,7 @@
       color: rgba(251, 247, 240, 0.3);
       margin-bottom: 16px;
     }
+
     .footer-links-group a {
       display: block;
       font-size: 0.88rem;
@@ -734,7 +955,11 @@
       margin-bottom: 10px;
       transition: color 0.3s;
     }
-    .footer-links-group a:hover { color: var(--amber-light); }
+
+    .footer-links-group a:hover {
+      color: var(--amber-light);
+    }
+
     .footer-bottom {
       max-width: 1120px;
       margin: 48px auto 0;
@@ -750,10 +975,22 @@
 
     /* ---- RESPONSIVE ---- */
     @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      nav.scrolled { padding: 12px 20px; }
-      .nav-links { display: none; }
-      .nav-mobile-toggle { display: block; }
+      nav {
+        padding: 16px 20px;
+      }
+
+      nav.scrolled {
+        padding: 12px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-mobile-toggle {
+        display: block;
+      }
+
       .nav-links.open {
         display: flex;
         flex-direction: column;
@@ -768,40 +1005,101 @@
         gap: 28px;
         z-index: 101;
       }
-      .nav-links.open a { font-size: 1.2rem; color: var(--ink); }
 
-      .hero { padding: 100px 20px 60px; min-height: auto; }
-      .hero-app-icon { width: 64px; height: 64px; border-radius: 16px; margin-bottom: 24px; }
-      .screenshot-carousel { gap: 12px; overflow-x: auto; justify-content: flex-start; padding: 0 20px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-      .screenshot-frame { width: 200px; min-width: 200px; scroll-snap-align: center; }
-      .screenshot-frame.hero-main { width: 220px; min-width: 220px; }
-      .screenshot-frame.hero-side { opacity: 0.85; transform: scale(0.95); }
-      .screenshot-carousel::-webkit-scrollbar { display: none; }
+      .nav-links.open a {
+        font-size: 1.2rem;
+        color: var(--ink);
+      }
 
-      section { padding: 80px 20px; }
+      .hero {
+        padding: 100px 20px 60px;
+        min-height: auto;
+      }
+
+      .hero-app-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        margin-bottom: 24px;
+      }
+
+      .screenshot-carousel {
+        gap: 12px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .screenshot-frame {
+        width: 200px;
+        min-width: 200px;
+        scroll-snap-align: center;
+      }
+
+      .screenshot-frame.hero-main {
+        width: 220px;
+        min-width: 220px;
+      }
+
+      .screenshot-frame.hero-side {
+        opacity: 0.85;
+        transform: scale(0.95);
+      }
+
+      .screenshot-carousel::-webkit-scrollbar {
+        display: none;
+      }
+
+      section {
+        padding: 80px 20px;
+      }
 
       .features-grid {
         grid-template-columns: 1fr;
         gap: 16px;
       }
-      .feature-card { padding: 28px 24px; }
+
+      .feature-card {
+        padding: 28px 24px;
+      }
 
       .pricing-grid {
         grid-template-columns: 1fr;
         max-width: 400px;
       }
-      .pricing-card { padding: 32px 28px; }
 
-      .footer-content { flex-direction: column; gap: 32px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
+      .pricing-card {
+        padding: 32px 28px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
     }
 
     @media (max-width: 480px) {
-      .hero-actions { flex-direction: column; width: 100%; }
-      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAV -->
@@ -811,7 +1109,7 @@
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="/privacy">Privacy</a>
-      <a href="#TODO_APP_STORE_LINK" class="nav-cta">Download</a>
+      <a href="https://apps.apple.com/us/app/memoires/id6760226058" class="nav-cta">Download</a>
     </div>
     <button class="nav-mobile-toggle" id="navToggle" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -826,10 +1124,14 @@
       Available on iOS
     </div>
     <h1>Your life, <em>beautifully</em> written</h1>
-    <p>Capture your daily moments through text, voice, and photos. Memoires is the journal that understands how you remember.</p>
+    <p>Capture your daily moments through text, voice, and photos. Memoires is the journal that understands how you
+      remember.</p>
     <div class="hero-actions">
-      <a href="#TODO_APP_STORE_LINK" class="btn-primary" id="download-hero">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <a href="https://apps.apple.com/us/app/memoires/id6760226058" class="btn-primary" id="download-hero">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+        </svg>
         Download for iOS
       </a>
       <a href="#features" class="btn-secondary">Learn more</a>
@@ -866,45 +1168,78 @@
       <div class="features-grid">
         <div class="feature-card fade-up">
           <div class="feature-icon amber">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" color="#B8875A"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" viewBox="0 0 24 24" color="#B8875A">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+              <line x1="12" y1="19" x2="12" y2="23" />
+              <line x1="8" y1="23" x2="16" y2="23" />
+            </svg>
           </div>
           <h3>Voice Dictation</h3>
           <p>Speak your thoughts in any language. On-device speech recognition turns your words into text instantly.</p>
         </div>
         <div class="feature-card fade-up" style="transition-delay:0.08s">
           <div class="feature-icon sage">
-            <svg width="24" height="24" fill="none" stroke="#6b8c63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <svg width="24" height="24" fill="none" stroke="#6b8c63" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
           </div>
           <h3>Photo Memories</h3>
-          <p>Attach photos from your library or camera. Each image is stored alongside your words, completing the story.</p>
+          <p>Attach photos from your library or camera. Each image is stored alongside your words, completing the story.
+          </p>
         </div>
         <div class="feature-card fade-up" style="transition-delay:0.16s">
           <div class="feature-icon gold">
-            <svg width="24" height="24" fill="none" stroke="#a08838" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <svg width="24" height="24" fill="none" stroke="#a08838" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
           </div>
           <h3>Smart Suggestions</h3>
           <p>Memoires detects unlogged trips and events from your photos, gently reminding you to write about them.</p>
         </div>
         <div class="feature-card fade-up" style="transition-delay:0.24s">
           <div class="feature-icon lavender">
-            <svg width="24" height="24" fill="none" stroke="#8070a8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            <svg width="24" height="24" fill="none" stroke="#8070a8" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+              <line x1="9" y1="9" x2="9.01" y2="9" />
+              <line x1="15" y1="9" x2="15.01" y2="9" />
+            </svg>
           </div>
           <h3>Mood Tracking</h3>
-          <p>Tag each entry with how you felt. Ten expressive moods help you trace your emotional patterns over time.</p>
+          <p>Tag each entry with how you felt. Ten expressive moods help you trace your emotional patterns over time.
+          </p>
         </div>
         <div class="feature-card fade-up" style="transition-delay:0.32s">
           <div class="feature-icon rose">
-            <svg width="24" height="24" fill="none" stroke="#b07070" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <svg width="24" height="24" fill="none" stroke="#b07070" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
           </div>
           <h3>Location Tagging</h3>
-          <p>Automatically tag where each memory was written. See your entries on a map and revisit the places that matter.</p>
+          <p>Automatically tag where each memory was written. See your entries on a map and revisit the places that
+            matter.</p>
         </div>
         <div class="feature-card fade-up" style="transition-delay:0.4s">
           <div class="feature-icon slate">
-            <svg width="24" height="24" fill="none" stroke="#687898" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+            <svg width="24" height="24" fill="none" stroke="#687898" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" viewBox="0 0 24 24">
+              <polyline points="16 16 12 12 8 16" />
+              <line x1="12" y1="12" x2="12" y2="21" />
+              <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
+            </svg>
           </div>
           <h3>iCloud Sync</h3>
-          <p>Your journal travels with you. Sync seamlessly across all your Apple devices with end-to-end encryption.</p>
+          <p>Your journal travels with you. Sync seamlessly across all your Apple devices with end-to-end encryption.
+          </p>
         </div>
       </div>
     </div>
@@ -935,23 +1270,38 @@
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">Up to 10 memories</span>
             </li>
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">Voice dictation</span>
             </li>
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">Photo attachments</span>
             </li>
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">Mood tracking</span>
             </li>
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">Location tagging</span>
             </li>
           </ul>
@@ -965,27 +1315,45 @@
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">Unlimited memories</span>
             </li>
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">Everything in Free</span>
             </li>
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">AI writing refinement</span>
             </li>
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">Smart photo suggestions</span>
             </li>
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">iCloud sync</span>
             </li>
             <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span class="pricing-feature">Future premium features</span>
             </li>
           </ul>
@@ -1000,12 +1368,22 @@
     <div class="container fade-up">
       <div class="feedback-card">
         <div class="feedback-icon">
-          <svg width="28" height="28" fill="none" stroke="var(--amber-dark)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <svg width="28" height="28" fill="none" stroke="var(--amber-dark)" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round" viewBox="0 0 24 24">
+            <path
+              d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+          </svg>
         </div>
         <h2 class="section-title">Help shape Memoires</h2>
-        <p class="section-subtitle">Have an idea for a feature? Found something that could be better? We'd love to hear from you. Your suggestions directly influence what we build next.</p>
-        <a href="mailto:feedback@memoires.app?subject=Feature%20Suggestion%20for%20Memoires" class="btn-primary" style="margin-top:32px">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <p class="section-subtitle">Have an idea for a feature? Found something that could be better? We'd love to hear
+          from you. Your suggestions directly influence what we build next.</p>
+        <a href="mailto:feedback@memoires.app?subject=Feature%20Suggestion%20for%20Memoires" class="btn-primary"
+          style="margin-top:32px">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
           Suggest a Feature
         </a>
       </div>
@@ -1017,8 +1395,11 @@
     <div class="container fade-up">
       <h2 class="section-title">Begin your story today</h2>
       <p class="section-subtitle">Download Memoires and start capturing the moments that make your life yours.</p>
-      <a href="#TODO_APP_STORE_LINK" class="btn-primary">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <a href="https://apps.apple.com/us/app/memoires/id6760226058" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+        </svg>
         Download for iOS
       </a>
     </div>
@@ -1035,7 +1416,7 @@
         <h4>Product</h4>
         <a href="#features">Features</a>
         <a href="#pricing">Pricing</a>
-        <a href="#TODO_APP_STORE_LINK">Download</a>
+        <a href="https://apps.apple.com/us/app/memoires/id6760226058">Download</a>
       </div>
       <div class="footer-links-group">
         <h4>Legal</h4>
@@ -1057,14 +1438,23 @@
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" aria-label="Close">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
     </button>
     <button class="lightbox-nav lightbox-prev" aria-label="Previous">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
     </button>
     <img src="" alt="Screenshot preview">
     <button class="lightbox-nav lightbox-next" aria-label="Next">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="9 6 15 12 9 18" />
+      </svg>
     </button>
   </div>
 
@@ -1137,4 +1527,5 @@
     });
   </script>
 </body>
+
 </html>
