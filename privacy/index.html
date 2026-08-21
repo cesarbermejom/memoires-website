@@ -233,77 +233,97 @@
 
   <div class="legal-header">
     <h1>Privacy Policy</h1>
-    <p>Last updated: March 9, 2026</p>
+    <p>Last updated: August 21, 2026</p>
   </div>
 
   <div class="legal-content">
     <h2>Your Privacy Matters</h2>
-    <p>Memoires is a personal journal app. Your memories are yours. We've designed Memoires with privacy at its core — your journal entries, photos, and personal data are stored on your device and never sold, shared, or used for advertising.</p>
+    <p>Memoires is a personal journal app. Your memories are yours. Your entries, photos, and location tags are stored on your device and are never sold, shared, or used for advertising. This page explains exactly what stays on your device, what leaves it, and what you can turn off.</p>
 
-    <h2>Information We Store</h2>
+    <h2>What Stays on Your Device</h2>
 
     <h3>On-Device Storage</h3>
-    <p>All journal entries, photos, mood data, and location information are stored locally on your device using Apple's SwiftData framework. This data never leaves your device unless you explicitly enable iCloud sync.</p>
+    <p>All journal entries, photos, drawings, mood data, and location tags are stored locally on your device using Apple's SwiftData framework. This data never leaves your device unless you explicitly enable iCloud Sync.</p>
 
     <h3>iCloud Sync (Optional)</h3>
-    <p>If you enable iCloud sync, your data is stored in your personal iCloud account using Apple's CloudKit framework. This data is encrypted and managed entirely by Apple under their privacy policy. Memoires does not have access to your iCloud data on Apple's servers — it is synced directly between your devices through your Apple ID.</p>
+    <p>If you enable iCloud Sync, your data is stored in your personal iCloud account using Apple's CloudKit private database, and synced between your own devices through your Apple ID. Memoires cannot read it.</p>
+    <p>Your iCloud data is encrypted in transit and at rest. However, unless you have enabled Apple's <a href="https://support.apple.com/en-us/102651" target="_blank" rel="noopener">Advanced Data Protection</a>, Apple holds the encryption keys. <strong>Memoires does not offer end-to-end encryption</strong>, and we want to be straightforward about that.</p>
 
-    <h2>Third-Party Services</h2>
+    <h3>App Lock</h3>
+    <p>If you enable App Lock, Memoires requires Face ID, Touch ID, or your device passcode to open. Authentication is handled entirely by iOS. Your biometric data never leaves Apple's Secure Enclave and is never accessible to Memoires.</p>
 
-    <h3>RevenueCat (Subscription Management)</h3>
-    <p>We use <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat</a> to manage subscriptions and in-app purchases. RevenueCat processes:</p>
+    <h2>What Leaves Your Device</h2>
+
+    <h3>Refine with AI (Premium)</h3>
+    <p>This is the only feature that sends your journal text off your device, and it only happens when you explicitly tap <strong>Refine with AI</strong> on a specific entry.</p>
+    <p>When you do, the text of that one entry is sent over an encrypted connection to our processing service, and from there to <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI</a>, which returns a cleaned-up version. Specifically:</p>
     <ul>
-      <li>An anonymous app user ID (not linked to your personal identity)</li>
-      <li>Purchase receipts from the Apple App Store</li>
-      <li>Subscription status (active, expired, etc.)</li>
+      <li>Only the text of the entry you are refining is sent. No other entries, photos, locations, or titles.</li>
+      <li>The request includes an anonymous subscriber identifier, so we can confirm your subscription and apply daily usage limits. It is not your name, email, or Apple ID.</li>
+      <li>We do not store the text of your entry on our servers. We do keep a count of how many times the feature has been used, linked to that anonymous identifier, to enforce those limits.</li>
+      <li>Under <a href="https://openai.com/policies/api-data-usage-policies" target="_blank" rel="noopener">OpenAI's API data usage policies</a>, text submitted through their API is not used to train their models. OpenAI may retain it for a limited period for abuse monitoring, under their own privacy policy.</li>
     </ul>
-    <p>RevenueCat does not have access to your journal entries, photos, or personal data. For more information, see <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat's Privacy Policy</a>.</p>
+    <p>If you never tap the button, your journal text never leaves your device.</p>
 
-    <h3>AI Text Processing (Supabase Edge Functions)</h3>
-    <p>If you use the AI writing refinement feature, the text you submit is sent to a secure Supabase Edge Function for processing. This text is:</p>
+    <h3>Voice Dictation</h3>
+    <p>Dictation is processed <strong>on your device</strong> whenever the language you have selected supports on-device recognition, which is the case for most supported languages.</p>
+    <p>For languages without on-device support, iOS sends the audio to Apple's speech-recognition service for transcription, under <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's privacy policy</a>. Memoires never receives, records, or stores the audio itself — only the text that comes back. You can see and change which language is used in Settings and in the editor.</p>
+
+    <h3>Anonymous Usage Statistics</h3>
+    <p>We use <a href="https://telemetrydeck.com/privacy/" target="_blank" rel="noopener">TelemetryDeck</a>, a privacy-focused analytics service, to understand how Memoires is used — which screens are opened, whether a feature was used, roughly how long a dictation ran.</p>
     <ul>
-      <li>Transmitted over HTTPS encryption</li>
-      <li>Processed in real-time and not stored on the server</li>
-      <li>Not used for training, analytics, or any purpose other than returning the refined text to you</li>
-      <li>Not linked to your identity or any account information</li>
+      <li>These events <strong>never</strong> include your journal text, entry titles, place names, or coordinates. Only counts, yes/no flags, and rough ranges.</li>
+      <li>TelemetryDeck uses a hashed identifier that cannot be traced back to you or followed across other apps.</li>
+      <li>Nothing here is used for advertising, and we do not track you across apps or websites.</li>
+      <li><strong>You can turn this off entirely</strong> in Settings &rarr; Privacy &rarr; Share Anonymous Analytics.</li>
     </ul>
-    <p>The AI processing is stateless — no data is retained after the response is returned to your device.</p>
+
+    <h3>Subscriptions</h3>
+    <p>Subscriptions are processed by Apple. We use <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat</a> to manage them, which receives your purchase receipts, subscription status, and an anonymous app user ID. RevenueCat has no access to your journal entries, photos, or location data. We never see your payment details.</p>
+
+    <h3>Device Integrity</h3>
+    <p>To stop our AI service being abused, Memoires uses Apple's App Attest to confirm requests come from a genuine, unmodified copy of the app. This exchanges a cryptographic token with Apple and our server. It contains no personal information and cannot identify you.</p>
 
     <h2>Permissions We Request</h2>
 
-    <h3>Microphone</h3>
-    <p>Used for voice dictation to transcribe your spoken words into text. <strong>Speech recognition is performed on-device</strong> using Apple's Speech framework whenever possible. Audio is not recorded, stored, or transmitted — it is processed in real-time and discarded.</p>
+    <h3>Microphone &amp; Speech Recognition</h3>
+    <p>Used for voice dictation. See <em>Voice Dictation</em> above for exactly where the audio goes.</p>
 
     <h3>Photo Library</h3>
-    <p>Used to let you attach photos to your journal entries and to scan for photo-based suggestions (detecting unlogged trips or events). Photos are accessed with your explicit permission, and thumbnail copies are stored locally on your device. We do not upload your photos to any server.</p>
+    <p>Used to attach photos to entries, and to look for unlogged trips and events so we can suggest writing about them. This scanning runs <strong>entirely on your device</strong>, including when it runs in the background, and thumbnail copies are stored locally. <strong>Your photos are never uploaded to us or to anyone else.</strong></p>
 
     <h3>Camera</h3>
-    <p>Used to take photos directly within the app for your journal entries. Photos taken are stored locally on your device.</p>
+    <p>Used to take photos directly within the app. They are stored locally on your device.</p>
 
     <h3>Location</h3>
-    <p>Used to auto-tag the location of your journal entries. Location data is stored only within the journal entry on your device. We do not track your location in the background or transmit it to any server.</p>
+    <p>Used to auto-tag where an entry took place. Location is stored only inside that entry on your device. We do not track your location in the background and <strong>never transmit it to any server</strong>.</p>
+
+    <h3>Face ID</h3>
+    <p>Used only to unlock the app when you have enabled App Lock. See <em>App Lock</em> above.</p>
 
     <h3>Notifications</h3>
-    <p>Used to send you optional daily journaling reminders at a time you choose. Notifications are scheduled locally on your device and do not involve any server communication.</p>
+    <p>Used for optional daily journaling reminders, and to tell you when a background scan has found photos worth writing about. Notifications are scheduled locally on your device. Memoires does not use push notifications and sends nothing to a server to deliver them.</p>
 
-    <h2>Data We Do Not Collect</h2>
+    <h2>What We Do Not Do</h2>
     <ul>
-      <li>We do not use any third-party analytics or tracking services</li>
-      <li>We do not display advertisements</li>
-      <li>We do not collect device identifiers for advertising purposes</li>
-      <li>We do not sell, share, or trade your personal data with anyone</li>
-      <li>We do not create user profiles or behavioral data</li>
-      <li>We do not use cookies or web tracking technologies</li>
+      <li>We do not display advertisements, and no data is ever used for advertising.</li>
+      <li>We do not sell, share, or trade your personal data with anyone.</li>
+      <li>We do not track you across other apps or websites.</li>
+      <li>We do not build behavioural profiles about you.</li>
+      <li>We do not upload your photos, locations, or entries — apart from the single case of Refine with AI, described above, which you trigger yourself.</li>
     </ul>
 
+    <h2>This Website</h2>
+    <p>memoires.app uses <a href="https://plausible.io/privacy-focused-web-analytics" target="_blank" rel="noopener">Plausible Analytics</a>, a privacy-friendly, cookieless analytics tool, to count page visits. It sets no cookies, collects no personal data, and does not track visitors across sites.</p>
+
     <h2>Data Retention</h2>
-    <p>Your journal entries and associated data remain on your device (and in your personal iCloud account, if sync is enabled) until you delete them. When you delete a memory, it is permanently removed. Uninstalling the app removes all local data.</p>
+    <p>Your entries stay on your device — and in your personal iCloud account if sync is enabled — until you delete them. Deleting a memory removes it permanently. Uninstalling the app removes all local data. To remove synced data, delete the app's data from your iCloud settings.</p>
 
     <h2>Children's Privacy</h2>
     <p>Memoires is not directed at children under the age of 13. We do not knowingly collect personal information from children.</p>
 
     <h2>Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated date. We encourage you to review this policy periodically.</p>
+    <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated date. We encourage you to review it periodically.</p>
 
     <h2>Contact Us</h2>
     <p>If you have any questions about this Privacy Policy or how your data is handled, please contact us at:</p>
