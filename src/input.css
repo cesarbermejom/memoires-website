@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Memoires — Design tokens
+   Style: warm editorial paper. Photography supplies the colour;
+   the page stays a neutral warm ground so screenshots never
+   compete with the brand.
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --paper: #FBF8F3;
+    --paper-deep: #F3ECE1;
+    --card: #FFFFFF;
+    --line: #E7DDCE;
+    --line-soft: #F0E7DA;
+
+    /* Text — warm near-black, never pure #000 on cream */
+    --ink: #1F1B16;        /* 16.2:1 on paper */
+    --ink-soft: #5A5047;   /*  7.4:1 on paper */
+
+    /* Accent — two tiers.
+       amber       = text-safe  (5.6:1 on paper)
+       amber-glow  = DECORATIVE ONLY (2.8:1) — fills, rules, glows. Never text. */
+    --amber: #8A5A22;
+    --amber-glow: #C08A4E;
+
+    /* Inverted panel (privacy section) */
+    --deep: #221C17;
+    --deep-ink: #F5EFE7;
+    --deep-ink-soft: #B3A697;
+
+    --shadow-lift: 0 1px 2px rgb(31 27 22 / 0.04), 0 12px 32px -8px rgb(31 27 22 / 0.10);
+    --shadow-phone: 0 2px 8px rgb(31 27 22 / 0.06), 0 32px 64px -16px rgb(31 27 22 / 0.22);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #171310;
+      --paper-deep: #201A15;
+      --card: #211B16;
+      --line: #332B23;
+      --line-soft: #2A231D;
+
+      --ink: #F5EFE7;        /* 16.2:1 on paper */
+      --ink-soft: #B0A498;   /*  7.6:1 on paper */
+
+      --amber: #E0A868;      /*  8.8:1 on paper */
+      --amber-glow: #C08A4E;
+
+      --deep: #100D0B;
+      --deep-ink: #F5EFE7;
+      --deep-ink-soft: #B3A697;
+
+      --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -8px rgb(0 0 0 / 0.5);
+      --shadow-phone: 0 2px 8px rgb(0 0 0 / 0.5), 0 32px 64px -16px rgb(0 0 0 / 0.7);
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Sticky nav must not cover anchor targets */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Fraunces is a variable serif: dial in warmth (SOFT) and a touch of
+     the "wonk" that keeps it human rather than fashion-magazine cold. */
+  .font-display {
+    font-variation-settings: "SOFT" 30, "WONK" 1, "opsz" 96;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--amber-glow) 30%, transparent);
+    color: var(--ink);
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-amber: var(--amber);
+  --color-amber-glow: var(--amber-glow);
+  --color-deep: var(--deep);
+  --color-deep-ink: var(--deep-ink);
+  --color-deep-ink-soft: var(--deep-ink-soft);
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --shadow-lift: var(--shadow-lift);
+  --shadow-phone: var(--shadow-phone);
+}
+
+@layer components {
+  /* Paper grain — sits above surfaces, below content, never intercepts clicks */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .grain::after { opacity: 0.06; }
+  }
+
+  /* Scroll reveal. Elements start visible and are hidden by JS only when
+     it is safe to animate them — so no-JS and reduced-motion users always
+     get the final readable state. */
+  .js-reveal [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .js-reveal [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js-reveal [data-reveal] { opacity: 1; transform: none; }
+    .js-reveal [data-reveal].is-in { transition: none; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Horizontal screenshot rail: native scrolling, so it stays keyboard-
+     and screen-reader accessible without carousel JS. */
+  .rail {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .rail::-webkit-scrollbar { display: none; }
+}

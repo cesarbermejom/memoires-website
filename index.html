@@ -3,1535 +3,680 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memoires — Your Life, Beautifully Written</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Memoires — The story is already in your camera roll</title>
   <meta name="description"
-    content="Memoires is a premium iOS journal app for capturing daily memories through text, voice, and photos. Beautiful, private, and intelligent.">
-  <meta name="theme-color" content="#D4A574">
+    content="Memoires is an iPhone journal that reads your camera roll on-device, notices the trips and moments you never wrote about, and helps you turn them into a journal you will actually keep.">
+  <meta name="theme-color" content="#FBF8F3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#171310" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://memoires.app/">
+
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <meta property="og:title" content="Memoires — Your Life, Beautifully Written">
+
+  <meta property="og:title" content="Memoires — The story is already in your camera roll">
   <meta property="og:description"
-    content="A premium iOS journal app for capturing daily memories through text, voice, and photos.">
+    content="An iPhone journal that notices the moments you never wrote about. Photo-led entries, on-device scanning, gentle reminders.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://memoires.app">
+  <meta property="og:image" content="https://memoires.app/assets/appicon.png">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/shots/timeline.webp" fetchpriority="high">
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
-  <style>
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <link rel="stylesheet" href="assets/tailwind.css">
 
-    :root {
-      --amber: #D4A574;
-      --amber-light: #E8C9A0;
-      --amber-dark: #B8875A;
-      --gold: #C9A84C;
-      --cream: #FBF7F0;
-      --warm-white: #F5EDE3;
-      --linen: #EDE4D8;
-      --parchment: #E8DFD3;
-      --ink: #2C2520;
-      --charcoal: #4A4440;
-      --stone: #7A7470;
-      --foggy: #A9A4A0;
-      --success: #7CAB80;
-      --error: #C87060;
-      --font-serif: 'Cormorant Garamond', 'Georgia', serif;
-      --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      color: var(--ink);
-      background: var(--cream);
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Grain texture overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.03;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    }
-
-    /* Scroll animations */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ---- NAV ---- */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
-    }
-
-    nav.scrolled {
-      background: rgba(251, 247, 240, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 1px 0 rgba(212, 165, 116, 0.15);
-      padding: 14px 40px;
-    }
-
-    .nav-logo {
-      font-family: var(--font-serif);
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .nav-logo img {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--stone);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: var(--ink);
-    }
-
-    .nav-cta {
-      background: var(--ink) !important;
-      color: var(--cream) !important;
-      padding: 10px 24px;
-      border-radius: 100px;
-      font-size: 0.85rem !important;
-      font-weight: 500 !important;
-      transition: background 0.3s !important;
-    }
-
-    .nav-cta:hover {
-      background: var(--charcoal) !important;
-    }
-
-    .nav-mobile-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 32px;
-      height: 32px;
-      position: relative;
-    }
-
-    .nav-mobile-toggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--ink);
-      position: absolute;
-      left: 5px;
-      transition: all 0.3s;
-    }
-
-    .nav-mobile-toggle span:nth-child(1) {
-      top: 9px;
-    }
-
-    .nav-mobile-toggle span:nth-child(2) {
-      top: 15px;
-    }
-
-    .nav-mobile-toggle span:nth-child(3) {
-      top: 21px;
-    }
-
-    /* ---- HERO ---- */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 120px 24px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -40%;
-      right: -20%;
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(circle, rgba(212, 165, 116, 0.12) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -15%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 20px;
-      background: var(--warm-white);
-      border: 1px solid var(--linen);
-      border-radius: 100px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--stone);
-      margin-bottom: 40px;
-      animation: fadeDown 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    .hero-badge .dot {
-      width: 6px;
-      height: 6px;
-      background: var(--success);
-      border-radius: 50%;
-    }
-
-    @keyframes fadeDown {
-      from {
-        opacity: 0;
-        transform: translateY(-16px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes scaleIn {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(3.2rem, 8vw, 6.5rem);
-      font-weight: 600;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--ink);
-      max-width: 800px;
-      animation: fadeUp 0.8s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--amber);
-    }
-
-    .hero p {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      color: var(--stone);
-      max-width: 520px;
-      margin-top: 28px;
-      line-height: 1.7;
-      animation: fadeUp 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    .hero-actions {
-      margin-top: 48px;
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-      animation: fadeUp 0.8s 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 36px;
-      background: var(--ink);
-      color: var(--cream);
-      font-family: var(--font-sans);
-      font-size: 0.95rem;
-      font-weight: 500;
-      border: none;
-      border-radius: 100px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .btn-primary:hover {
-      background: var(--charcoal);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(44, 37, 32, 0.15);
-    }
-
-    .btn-primary svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 32px;
-      background: transparent;
-      color: var(--stone);
-      font-family: var(--font-sans);
-      font-size: 0.95rem;
-      font-weight: 500;
-      border: 1.5px solid var(--linen);
-      border-radius: 100px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--amber-light);
-      color: var(--ink);
-    }
-
-    .hero-app-icon {
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      box-shadow: 0 4px 16px rgba(44, 37, 32, 0.1);
-      margin-bottom: 32px;
-      animation: scaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    .hero-visual {
-      margin-top: 72px;
-      animation: scaleIn 1s 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-      position: relative;
-      width: 100%;
-      max-width: 1120px;
-    }
-
-    .screenshot-carousel {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      align-items: flex-end;
-      padding: 0 24px;
-    }
-
-    .screenshot-frame {
-      flex-shrink: 0;
-      width: 240px;
-      border-radius: 32px;
-      overflow: hidden;
-      box-shadow:
-        0 2px 4px rgba(44, 37, 32, 0.04),
-        0 12px 40px rgba(44, 37, 32, 0.08),
-        0 40px 80px rgba(44, 37, 32, 0.06);
-      border: 1px solid rgba(212, 165, 116, 0.12);
-      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .screenshot-frame:hover {
-      transform: translateY(-8px);
-    }
-
-    .screenshot-frame.hero-main {
-      width: 270px;
-      z-index: 2;
-    }
-
-    .screenshot-frame.hero-side {
-      opacity: 0.7;
-      transform: scale(0.92);
-    }
-
-    .screenshot-frame.hero-side:hover {
-      opacity: 1;
-      transform: scale(0.92) translateY(-8px);
-    }
-
-    .screenshot-frame {
-      cursor: pointer;
-    }
-
-    .screenshot-frame img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Lightbox */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(44, 37, 32, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      cursor: pointer;
-    }
-
-    .lightbox.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .lightbox img {
-      max-height: 90vh;
-      max-width: 420px;
-      width: auto;
-      border-radius: 32px;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
-      transform: scale(0.92);
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .lightbox.active img {
-      transform: scale(1);
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 24px;
-      right: 28px;
-      width: 40px;
-      height: 40px;
-      background: rgba(251, 247, 240, 0.12);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-    }
-
-    .lightbox-close:hover {
-      background: rgba(251, 247, 240, 0.2);
-    }
-
-    .lightbox-close svg {
-      width: 18px;
-      height: 18px;
-      color: var(--cream);
-    }
-
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      background: rgba(251, 247, 240, 0.12);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-    }
-
-    .lightbox-nav:hover {
-      background: rgba(251, 247, 240, 0.2);
-    }
-
-    .lightbox-nav svg {
-      width: 20px;
-      height: 20px;
-      color: var(--cream);
-    }
-
-    .lightbox-prev {
-      left: 24px;
-    }
-
-    .lightbox-next {
-      right: 24px;
-    }
-
-    @media (max-width: 768px) {
-      .lightbox img {
-        max-width: 85vw;
-        border-radius: 24px;
-      }
-
-      .lightbox-nav {
-        display: none;
-      }
-    }
-
-    /* ---- SECTION SHARED ---- */
-    section {
-      padding: 120px 24px;
-    }
-
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--amber);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      max-width: 600px;
-    }
-
-    .section-subtitle {
-      font-size: 1.05rem;
-      color: var(--stone);
-      max-width: 500px;
-      margin-top: 16px;
-      line-height: 1.7;
-    }
-
-    /* ---- FEATURES ---- */
-    .features {
-      background: var(--cream);
-    }
-
-    .features-header {
-      margin-bottom: 72px;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .feature-card {
-      background: var(--warm-white);
-      border: 1px solid rgba(212, 165, 116, 0.1);
-      border-radius: 24px;
-      padding: 36px 32px;
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(44, 37, 32, 0.06);
-      border-color: rgba(212, 165, 116, 0.2);
-    }
-
-    .feature-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-      font-size: 1.4rem;
-    }
-
-    .feature-icon.amber {
-      background: rgba(212, 165, 116, 0.15);
-    }
-
-    .feature-icon.gold {
-      background: rgba(201, 168, 76, 0.12);
-    }
-
-    .feature-icon.sage {
-      background: rgba(168, 192, 160, 0.2);
-    }
-
-    .feature-icon.lavender {
-      background: rgba(184, 168, 208, 0.18);
-    }
-
-    .feature-icon.rose {
-      background: rgba(212, 160, 160, 0.18);
-    }
-
-    .feature-icon.slate {
-      background: rgba(136, 152, 184, 0.18);
-    }
-
-    .feature-card h3 {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 10px;
-    }
-
-    .feature-card p {
-      font-size: 0.92rem;
-      color: var(--stone);
-      line-height: 1.65;
-    }
-
-    /* ---- QUOTE / BREAK ---- */
-    .quote-section {
-      background: var(--warm-white);
-      text-align: center;
-      padding: 100px 24px;
-      position: relative;
-    }
-
-    .quote-section::before {
-      content: '\201C';
-      font-family: var(--font-serif);
-      font-size: 8rem;
-      color: var(--amber-light);
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      line-height: 1;
-      pointer-events: none;
-    }
-
-    .quote-text {
-      font-family: var(--font-serif);
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--charcoal);
-      max-width: 640px;
-      margin: 0 auto;
-      line-height: 1.5;
-    }
-
-    .quote-attribution {
-      font-size: 0.88rem;
-      color: var(--foggy);
-      margin-top: 24px;
-    }
-
-    /* ---- PRICING ---- */
-    .pricing {
-      background: var(--cream);
-    }
-
-    .pricing-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .pricing-header .section-title {
-      margin: 0 auto;
-    }
-
-    .pricing-header .section-subtitle {
-      margin: 16px auto 0;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      max-width: 740px;
-      margin: 0 auto;
-    }
-
-    .pricing-card {
-      background: var(--warm-white);
-      border: 1px solid rgba(212, 165, 116, 0.1);
-      border-radius: 24px;
-      padding: 40px 36px;
-      position: relative;
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(44, 37, 32, 0.06);
-    }
-
-    .pricing-card.featured {
-      background: var(--ink);
-      border-color: transparent;
-    }
-
-    .pricing-card.featured * {
-      color: var(--cream);
-    }
-
-    .pricing-card.featured .pricing-feature {
-      color: rgba(251, 247, 240, 0.65);
-    }
-
-    .pricing-card.featured .pricing-check {
-      color: var(--amber-light);
-    }
-
-    .pricing-badge {
-      display: inline-block;
-      background: var(--amber);
-      color: var(--cream);
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 5px 14px;
-      border-radius: 100px;
-      margin-bottom: 20px;
-    }
-
-    .pricing-plan {
-      font-family: var(--font-serif);
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .pricing-desc {
-      font-size: 0.88rem;
-      color: var(--stone);
-      margin-bottom: 28px;
-    }
-
-    .pricing-price {
-      font-family: var(--font-serif);
-      font-size: 3rem;
-      font-weight: 700;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .pricing-period {
-      font-size: 0.85rem;
-      color: var(--stone);
-      margin-bottom: 32px;
-    }
-
-    .pricing-divider {
-      height: 1px;
-      background: var(--linen);
-      margin-bottom: 28px;
-    }
-
-    .pricing-card.featured .pricing-divider {
-      background: rgba(251, 247, 240, 0.1);
-    }
-
-    .pricing-features {
-      list-style: none;
-    }
-
-    .pricing-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 14px;
-      font-size: 0.9rem;
-    }
-
-    .pricing-check {
-      color: var(--success);
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .pricing-feature {
-      color: var(--charcoal);
-    }
-
-    .pricing-annual {
-      text-align: center;
-      margin-top: 32px;
-      font-size: 0.9rem;
-      color: var(--stone);
-    }
-
-    .pricing-annual strong {
-      color: var(--amber-dark);
-      font-weight: 600;
-    }
-
-    /* ---- FEEDBACK ---- */
-    .feedback-section {
-      background: var(--cream);
-      padding: 80px 24px;
-    }
-
-    .feedback-card {
-      background: var(--warm-white);
-      border: 1px solid rgba(212, 165, 116, 0.12);
-      border-radius: 28px;
-      padding: 64px 48px;
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .feedback-card .section-title {
-      margin: 0 auto;
-    }
-
-    .feedback-card .section-subtitle {
-      margin: 16px auto 0;
-      max-width: 460px;
-    }
-
-    .feedback-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 16px;
-      background: rgba(212, 165, 116, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-    }
-
-    @media (max-width: 768px) {
-      .feedback-card {
-        padding: 40px 28px;
-      }
-    }
-
-    /* ---- CTA ---- */
-    .cta-section {
-      background: var(--warm-white);
-      text-align: center;
-      padding: 120px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(212, 165, 116, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .cta-section .section-title {
-      margin: 0 auto 16px;
-      max-width: 500px;
-    }
-
-    .cta-section .section-subtitle {
-      margin: 0 auto 40px;
-    }
-
-    /* ---- FOOTER ---- */
-    footer {
-      background: var(--ink);
-      color: rgba(251, 247, 240, 0.5);
-      padding: 64px 24px 40px;
-    }
-
-    .footer-content {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 40px;
-    }
-
-    .footer-brand .nav-logo {
-      color: var(--cream);
-    }
-
-    .footer-tagline {
-      font-size: 0.88rem;
-      color: rgba(251, 247, 240, 0.4);
-      margin-top: 8px;
-      max-width: 260px;
-    }
-
-    .footer-links-group h4 {
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: rgba(251, 247, 240, 0.3);
-      margin-bottom: 16px;
-    }
-
-    .footer-links-group a {
-      display: block;
-      font-size: 0.88rem;
-      color: rgba(251, 247, 240, 0.55);
-      text-decoration: none;
-      margin-bottom: 10px;
-      transition: color 0.3s;
-    }
-
-    .footer-links-group a:hover {
-      color: var(--amber-light);
-    }
-
-    .footer-bottom {
-      max-width: 1120px;
-      margin: 48px auto 0;
-      padding-top: 24px;
-      border-top: 1px solid rgba(251, 247, 240, 0.06);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-size: 0.8rem;
-    }
-
-    /* ---- RESPONSIVE ---- */
-    @media (max-width: 768px) {
-      nav {
-        padding: 16px 20px;
-      }
-
-      nav.scrolled {
-        padding: 12px 20px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .nav-mobile-toggle {
-        display: block;
-      }
-
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--cream);
-        justify-content: center;
-        align-items: center;
-        gap: 28px;
-        z-index: 101;
-      }
-
-      .nav-links.open a {
-        font-size: 1.2rem;
-        color: var(--ink);
-      }
-
-      .hero {
-        padding: 100px 20px 60px;
-        min-height: auto;
-      }
-
-      .hero-app-icon {
-        width: 64px;
-        height: 64px;
-        border-radius: 16px;
-        margin-bottom: 24px;
-      }
-
-      .screenshot-carousel {
-        gap: 12px;
-        overflow-x: auto;
-        justify-content: flex-start;
-        padding: 0 20px;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .screenshot-frame {
-        width: 200px;
-        min-width: 200px;
-        scroll-snap-align: center;
-      }
-
-      .screenshot-frame.hero-main {
-        width: 220px;
-        min-width: 220px;
-      }
-
-      .screenshot-frame.hero-side {
-        opacity: 0.85;
-        transform: scale(0.95);
-      }
-
-      .screenshot-carousel::-webkit-scrollbar {
-        display: none;
-      }
-
-      section {
-        padding: 80px 20px;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .feature-card {
-        padding: 28px 24px;
-      }
-
-      .pricing-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-      }
-
-      .pricing-card {
-        padding: 32px 28px;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        gap: 32px;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-actions {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .btn-primary,
-      .btn-secondary {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://analytics.jumptozero.com/js/pa-GdxtH_h3EF7qFcxgc7gUv.js"></script>
   <script>
     window.plausible = window.plausible || function () { (plausible.q = plausible.q || []).push(arguments) }, plausible.init = plausible.init || function (i) { plausible.o = i || {} };
     plausible.init()
   </script>
-
 </head>
 
-<body>
+<body class="font-sans bg-paper text-ink antialiased">
 
-  <!-- NAV -->
-  <nav id="navbar">
-    <a href="/" class="nav-logo"><img src="assets/appicon.png" alt="Memoires icon">Memoires</a>
-    <div class="nav-links" id="navLinks">
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="/privacy">Privacy</a>
-      <a href="https://apps.apple.com/app/memoires/id6760226058" class="nav-cta">Download</a>
-    </div>
-    <button class="nav-mobile-toggle" id="navToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+  <a href="#main"
+    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-paper">
+    Skip to content
+  </a>
 
-  <!-- HERO -->
-  <section class="hero">
-    <img src="assets/appicon.png" alt="Memoires app icon" class="hero-app-icon">
-    <div class="hero-badge">
-      <span class="dot"></span>
-      Available on iOS
-    </div>
-    <h1>Your life, <em>beautifully</em> written</h1>
-    <p>Capture your daily moments through text, voice, and photos. Memoires is the journal that understands how you
-      remember.</p>
-    <div class="hero-actions">
-      <a href="https://apps.apple.com/app/memoires/id6760226058" class="btn-primary" id="download-hero">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-        </svg>
-        Download for iOS
+  <!-- ============================= NAV ============================= -->
+  <header
+    class="sticky top-0 z-50 border-b border-line/70 bg-paper/95 backdrop-blur-xl supports-[backdrop-filter]:bg-paper/88">
+    <nav aria-label="Main" class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8 md:h-20">
+      <a href="#main" class="group flex min-h-11 items-center gap-2.5">
+        <img src="assets/appicon-192.webp" alt="" width="36" height="36" class="h-8 w-8 rounded-[9px] md:h-9 md:w-9">
+        <span class="font-display text-xl font-semibold tracking-tight md:text-2xl">Memoires</span>
       </a>
-      <a href="#features" class="btn-secondary">Learn more</a>
-    </div>
-    <div class="hero-visual">
-      <div class="screenshot-carousel">
-        <div class="screenshot-frame hero-side">
-          <img src="assets/screenshots/calendar.png" alt="Calendar view with entries marked on days" loading="lazy">
-        </div>
-        <div class="screenshot-frame hero-side">
-          <img src="assets/screenshots/editor.png" alt="Memory editor with mood picker and photos" loading="lazy">
-        </div>
-        <div class="screenshot-frame hero-main">
-          <img src="assets/screenshots/timeline.png" alt="Memoires timeline showing journal entries" loading="lazy">
-        </div>
-        <div class="screenshot-frame hero-side">
-          <img src="assets/screenshots/detail.png" alt="Memory detail view with photos and text" loading="lazy">
-        </div>
-        <div class="screenshot-frame hero-side">
-          <img src="assets/screenshots/dictation.png" alt="Voice dictation with live transcription" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- FEATURES -->
-  <section class="features" id="features">
-    <div class="container">
-      <div class="features-header fade-up">
-        <div class="section-label">Features</div>
-        <h2 class="section-title">Everything you need to remember what matters</h2>
-        <p class="section-subtitle">Simple tools that get out of your way and let you focus on capturing the moment.</p>
+      <div class="hidden items-center gap-8 md:flex">
+        <a href="#how" class="text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">How it
+          works</a>
+        <a href="#features" class="text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Features</a>
+        <a href="#privacy" class="text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Privacy</a>
+        <a href="#horizon" class="text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">What's
+          next</a>
       </div>
-      <div class="features-grid">
-        <div class="feature-card fade-up">
-          <div class="feature-icon amber">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-              stroke-linejoin="round" viewBox="0 0 24 24" color="#B8875A">
-              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-              <line x1="12" y1="19" x2="12" y2="23" />
-              <line x1="8" y1="23" x2="16" y2="23" />
-            </svg>
-          </div>
-          <h3>Voice Dictation</h3>
-          <p>Speak your thoughts in any language. On-device speech recognition turns your words into text instantly.</p>
-        </div>
-        <div class="feature-card fade-up" style="transition-delay:0.08s">
-          <div class="feature-icon sage">
-            <svg width="24" height="24" fill="none" stroke="#6b8c63" stroke-width="1.8" stroke-linecap="round"
-              stroke-linejoin="round" viewBox="0 0 24 24">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <polyline points="21 15 16 10 5 21" />
-            </svg>
-          </div>
-          <h3>Photo Memories</h3>
-          <p>Attach photos from your library or camera. Each image is stored alongside your words, completing the story.
-          </p>
-        </div>
-        <div class="feature-card fade-up" style="transition-delay:0.16s">
-          <div class="feature-icon gold">
-            <svg width="24" height="24" fill="none" stroke="#a08838" stroke-width="1.8" stroke-linecap="round"
-              stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-          </div>
-          <h3>Smart Suggestions</h3>
-          <p>Memoires detects unlogged trips and events from your photos, gently reminding you to write about them.</p>
-        </div>
-        <div class="feature-card fade-up" style="transition-delay:0.24s">
-          <div class="feature-icon lavender">
-            <svg width="24" height="24" fill="none" stroke="#8070a8" stroke-width="1.8" stroke-linecap="round"
-              stroke-linejoin="round" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-              <line x1="9" y1="9" x2="9.01" y2="9" />
-              <line x1="15" y1="9" x2="15.01" y2="9" />
-            </svg>
-          </div>
-          <h3>Mood Tracking</h3>
-          <p>Tag each entry with how you felt. Ten expressive moods help you trace your emotional patterns over time.
-          </p>
-        </div>
-        <div class="feature-card fade-up" style="transition-delay:0.32s">
-          <div class="feature-icon rose">
-            <svg width="24" height="24" fill="none" stroke="#b07070" stroke-width="1.8" stroke-linecap="round"
-              stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-          </div>
-          <h3>Location Tagging</h3>
-          <p>Automatically tag where each memory was written. See your entries on a map and revisit the places that
-            matter.</p>
-        </div>
-        <div class="feature-card fade-up" style="transition-delay:0.4s">
-          <div class="feature-icon slate">
-            <svg width="24" height="24" fill="none" stroke="#687898" stroke-width="1.8" stroke-linecap="round"
-              stroke-linejoin="round" viewBox="0 0 24 24">
-              <polyline points="16 16 12 12 8 16" />
-              <line x1="12" y1="12" x2="12" y2="21" />
-              <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
-            </svg>
-          </div>
-          <h3>iCloud Sync</h3>
-          <p>Your journal travels with you. Sync seamlessly across all your Apple devices with end-to-end encryption.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- QUOTE -->
-  <section class="quote-section">
-    <div class="container fade-up">
-      <p class="quote-text">The act of writing is the act of discovering what you believe.</p>
-      <p class="quote-attribution">David Hare</p>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section class="pricing" id="pricing">
-    <div class="container">
-      <div class="pricing-header fade-up">
-        <div class="section-label">Pricing</div>
-        <h2 class="section-title">Start free, write forever</h2>
-        <p class="section-subtitle">No ads, no tracking. Just a beautiful space for your thoughts.</p>
-      </div>
-      <div class="pricing-grid">
-        <div class="pricing-card fade-up">
-          <div class="pricing-plan">Free</div>
-          <div class="pricing-desc">Perfect to get started</div>
-          <div class="pricing-price">$0</div>
-          <div class="pricing-period">Forever free</div>
-          <div class="pricing-divider"></div>
-          <ul class="pricing-features">
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">Up to 10 memories</span>
-            </li>
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">Voice dictation</span>
-            </li>
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">Photo attachments</span>
-            </li>
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">Mood tracking</span>
-            </li>
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">Location tagging</span>
-            </li>
-          </ul>
-        </div>
-        <div class="pricing-card featured fade-up" style="transition-delay:0.1s">
-          <div class="pricing-badge">Most Popular</div>
-          <div class="pricing-plan">Unlimited</div>
-          <div class="pricing-desc" style="color:rgba(251,247,240,0.5)">For the dedicated journaler</div>
-          <div class="pricing-price">$2.99</div>
-          <div class="pricing-period" style="color:rgba(251,247,240,0.4)">per month</div>
-          <div class="pricing-divider"></div>
-          <ul class="pricing-features">
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">Unlimited memories</span>
-            </li>
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">Everything in Free</span>
-            </li>
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">AI writing refinement</span>
-            </li>
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">Smart photo suggestions</span>
-            </li>
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">iCloud sync</span>
-            </li>
-            <li>
-              <svg class="pricing-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span class="pricing-feature">Future premium features</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <p class="pricing-annual fade-up">Save with annual billing: <strong>$19.99/year</strong> (save 44%)</p>
-    </div>
-  </section>
-
-  <!-- FEEDBACK -->
-  <section class="feedback-section" id="feedback">
-    <div class="container fade-up">
-      <div class="feedback-card">
-        <div class="feedback-icon">
-          <svg width="28" height="28" fill="none" stroke="var(--amber-dark)" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round" viewBox="0 0 24 24">
-            <path
-              d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-          </svg>
-        </div>
-        <h2 class="section-title">Help shape Memoires</h2>
-        <p class="section-subtitle">Have an idea for a feature? Found something that could be better? We'd love to hear
-          from you. Your suggestions directly influence what we build next.</p>
-        <a href="mailto:feedback@memoires.app?subject=Feature%20Suggestion%20for%20Memoires" class="btn-primary"
-          style="margin-top:32px">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round" viewBox="0 0 24 24">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-            <polyline points="22,6 12,13 2,6" />
-          </svg>
-          Suggest a Feature
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="container fade-up">
-      <h2 class="section-title">Begin your story today</h2>
-      <p class="section-subtitle">Download Memoires and start capturing the moments that make your life yours.</p>
-      <a href="https://apps.apple.com/app/memoires/id6760226058" class="btn-primary">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <a href="https://apps.apple.com/app/memoires/id6760226058" target="_blank" rel="noopener"
+        class="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper transition-all duration-200 hover:opacity-90 active:scale-[0.97] sm:px-5">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-4 w-4">
           <path
-            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+            d="M17.05 12.54c-.02-2.4 1.96-3.55 2.05-3.61-1.12-1.63-2.86-1.86-3.48-1.89-1.48-.15-2.89.87-3.64.87-.75 0-1.91-.85-3.14-.83-1.61.02-3.1.94-3.93 2.38-1.68 2.91-.43 7.22 1.2 9.58.8 1.16 1.75 2.46 3 2.41 1.21-.05 1.67-.78 3.13-.78 1.46 0 1.87.78 3.14.75 1.3-.02 2.12-1.18 2.91-2.34.92-1.34 1.3-2.64 1.32-2.71-.03-.01-2.53-.97-2.56-3.83zM14.7 5.09c.66-.81 1.11-1.93.99-3.05-.95.04-2.11.64-2.8 1.44-.61.71-1.15 1.85-1.01 2.94 1.06.08 2.15-.54 2.82-1.33z" />
         </svg>
-        Download for iOS
+        <span class="hidden sm:inline">Download</span>
+        <span class="sm:hidden">Get it</span>
       </a>
-    </div>
-  </section>
+    </nav>
+  </header>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo"><img src="assets/appicon.png" alt="Memoires icon">Memoires</a>
-        <p class="footer-tagline">Your life, beautifully written. A journal app crafted with care.</p>
+  <main id="main">
+
+    <!-- ============================= HERO ============================= -->
+    <section class="grain relative overflow-hidden px-5 pt-16 pb-20 sm:px-8 md:pt-24 md:pb-28 lg:pt-28">
+      <!-- warm light bloom, decorative -->
+      <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 -top-40 h-[38rem] opacity-70"
+        style="background: radial-gradient(60% 55% at 50% 40%, color-mix(in srgb, var(--amber-glow) 26%, transparent), transparent 70%);">
       </div>
-      <div class="footer-links-group">
-        <h4>Product</h4>
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="https://apps.apple.com/app/memoires/id6760226058">Download</a>
+
+      <div class="relative mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+
+        <div class="text-center lg:text-left">
+          <p data-reveal
+            class="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-card/70 px-3.5 py-1.5 text-xs font-medium tracking-wide text-ink-soft">
+            <span class="inline-block h-1.5 w-1.5 rounded-full bg-amber-glow" aria-hidden="true"></span>
+            For iPhone · Journaling
+          </p>
+
+          <h1 data-reveal style="--reveal-delay:60ms"
+            class="font-display text-[2.6rem] leading-[1.04] font-semibold tracking-[-0.025em] text-balance sm:text-6xl lg:text-[4.1rem]">
+            The story is already<br class="hidden sm:block"> in your camera roll.
+          </h1>
+
+          <p data-reveal style="--reveal-delay:120ms"
+            class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-ink-soft text-pretty sm:text-xl lg:mx-0">
+            You photograph everything and write down almost none of it. Memoires reads your photo library
+            <em class="font-medium not-italic text-ink">on your device</em>, spots the trip you just took, and asks you
+            to say a few words while you still remember.
+          </p>
+
+          <div data-reveal style="--reveal-delay:180ms"
+            class="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center lg:justify-start">
+            <a href="https://apps.apple.com/app/memoires/id6760226058" target="_blank" rel="noopener"
+              class="group inline-flex min-h-14 cursor-pointer items-center justify-center gap-3 rounded-2xl bg-ink px-7 text-paper shadow-lift transition-all duration-200 hover:opacity-90 active:scale-[0.98]">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-7 w-7 shrink-0">
+                <path
+                  d="M17.05 12.54c-.02-2.4 1.96-3.55 2.05-3.61-1.12-1.63-2.86-1.86-3.48-1.89-1.48-.15-2.89.87-3.64.87-.75 0-1.91-.85-3.14-.83-1.61.02-3.1.94-3.93 2.38-1.68 2.91-.43 7.22 1.2 9.58.8 1.16 1.75 2.46 3 2.41 1.21-.05 1.67-.78 3.13-.78 1.46 0 1.87.78 3.14.75 1.3-.02 2.12-1.18 2.91-2.34.92-1.34 1.3-2.64 1.32-2.71-.03-.01-2.53-.97-2.56-3.83zM14.7 5.09c.66-.81 1.11-1.93.99-3.05-.95.04-2.11.64-2.8 1.44-.61.71-1.15 1.85-1.01 2.94 1.06.08 2.15-.54 2.82-1.33z" />
+              </svg>
+              <span class="text-left leading-none">
+                <span class="block text-[0.65rem] font-medium tracking-wide opacity-75">Download on the</span>
+                <span class="mt-1 block text-lg font-semibold tracking-tight">App Store</span>
+              </span>
+            </a>
+
+            <a href="#how"
+              class="inline-flex min-h-14 cursor-pointer items-center justify-center gap-2 rounded-2xl border border-line bg-card px-7 text-base font-semibold text-ink transition-all duration-200 hover:border-amber-glow hover:bg-paper-deep active:scale-[0.98]">
+              See how it works
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" class="h-4 w-4">
+                <path d="M12 5v14M19 12l-7 7-7-7" />
+              </svg>
+            </a>
+          </div>
+
+          <p data-reveal style="--reveal-delay:240ms" class="mt-6 text-sm text-ink-soft">
+            Free to start · Your entries stay on your device
+          </p>
+        </div>
+
+        <!-- Phone -->
+        <div data-reveal style="--reveal-delay:150ms" class="relative mx-auto w-full max-w-[19rem] sm:max-w-[21rem]">
+          <div aria-hidden="true"
+            class="absolute -inset-x-10 -inset-y-6 -z-10 rounded-full opacity-60 blur-3xl"
+            style="background: radial-gradient(closest-side, color-mix(in srgb, var(--amber-glow) 40%, transparent), transparent);">
+          </div>
+
+          <div class="relative rounded-[2.6rem] border border-line bg-card p-2 shadow-phone">
+            <img src="assets/shots/timeline.webp" width="644" height="1400" fetchpriority="high" decoding="async"
+              alt="The Memoires timeline on iPhone, showing dated journal entries such as Thursday Run and Sunday at the Park, each with its own photo thumbnail."
+              class="w-full rounded-[2.1rem]">
+          </div>
+
+          <!-- Illustrative notification: the core behaviour, shown not told -->
+          <div
+            class="absolute -bottom-5 -left-4 w-[15.5rem] rounded-2xl border border-line bg-card/95 p-3.5 shadow-lift backdrop-blur-sm sm:-left-10 sm:w-[17rem]">
+            <div class="flex items-start gap-3">
+              <span
+                class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-glow/20 text-amber">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true" class="h-4 w-4">
+                  <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+                  <circle cx="12" cy="12" r="4" />
+                </svg>
+              </span>
+              <div class="min-w-0">
+                <p class="text-[0.8rem] font-semibold leading-snug">47 photos from last weekend</p>
+                <p class="mt-0.5 text-[0.78rem] leading-snug text-ink-soft">Looks like a trip. Want to write about it?</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="footer-links-group">
-        <h4>Legal</h4>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
+    </section>
+
+    <!-- ============================= TRUST STRIP ============================= -->
+    <section aria-label="What Memoires does with your data" class="border-y border-line bg-paper-deep/60">
+      <ul class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-3 px-5 py-5 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-8 sm:px-8">
+        <li class="flex items-center gap-2 text-sm font-medium text-ink-soft">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true" class="h-4 w-4 text-amber">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          Photo scanning runs on-device
+        </li>
+        <li class="flex items-center gap-2 text-sm font-medium text-ink-soft">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true" class="h-4 w-4 text-amber">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          No ads, ever
+        </li>
+        <li class="flex items-center gap-2 text-sm font-medium text-ink-soft">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true" class="h-4 w-4 text-amber">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          Your data is never sold
+        </li>
+        <li class="flex items-center gap-2 text-sm font-medium text-ink-soft">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true" class="h-4 w-4 text-amber">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          iCloud sync is optional
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================= THE INSIGHT ============================= -->
+    <section class="px-5 py-24 sm:px-8 md:py-32">
+      <div class="mx-auto max-w-3xl text-center">
+        <p data-reveal class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber">Why journals fail</p>
+        <h2 data-reveal style="--reveal-delay:60ms"
+          class="font-display text-3xl leading-[1.12] font-semibold tracking-[-0.02em] text-balance sm:text-4xl md:text-[2.9rem]">
+          A blank page on a Tuesday night is a terrible way to remember your life.
+        </h2>
+        <p data-reveal style="--reveal-delay:120ms" class="mt-7 text-lg leading-relaxed text-ink-soft text-pretty">
+          Most journalling apps hand you an empty box and hope you feel inspired. You don't, so you stop — and the year
+          disappears anyway. Memoires starts from the opposite end: from the thousands of photos you already took,
+          which are a far better record of what actually happened than your memory of a Tuesday.
+        </p>
       </div>
-      <div class="footer-links-group">
-        <h4>Contact</h4>
-        <a href="mailto:support@memoires.app">Support</a>
-        <a href="mailto:feedback@memoires.app?subject=Feature%20Suggestion%20for%20Memoires">Suggest a Feature</a>
+    </section>
+
+    <!-- ============================= HOW IT WORKS ============================= -->
+    <section id="how" class="border-y border-line bg-paper-deep/50 px-5 py-24 sm:px-8 md:py-32">
+      <div class="mx-auto max-w-6xl">
+        <div class="mx-auto max-w-2xl text-center">
+          <p data-reveal class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber">How it works</p>
+          <h2 data-reveal style="--reveal-delay:60ms"
+            class="font-display text-3xl leading-[1.14] font-semibold tracking-[-0.02em] text-balance sm:text-4xl md:text-[2.7rem]">
+            It notices first. You just write.
+          </h2>
+        </div>
+
+        <ol class="mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
+          <li data-reveal class="relative">
+            <span
+              class="font-display mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-card text-lg font-semibold text-amber">1</span>
+            <h3 class="font-display text-xl font-semibold tracking-tight">Memoires looks through your photos</h3>
+            <p class="mt-3 leading-relaxed text-ink-soft text-pretty">
+              In the background, entirely on your iPhone, it groups recent photos by time and place to spot a weekend
+              away, a birthday, a day that clearly wasn't ordinary. Nothing is uploaded to do this.
+            </p>
+          </li>
+          <li data-reveal style="--reveal-delay:100ms" class="relative">
+            <span
+              class="font-display mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-card text-lg font-semibold text-amber">2</span>
+            <h3 class="font-display text-xl font-semibold tracking-tight">It nudges you at the right moment</h3>
+            <p class="mt-3 leading-relaxed text-ink-soft text-pretty">
+              A quiet local notification: <em class="not-italic text-ink">you haven't written about Lisbon yet</em>.
+              Plus a daily reminder if you want one. Scheduled on your device — no push server involved.
+            </p>
+          </li>
+          <li data-reveal style="--reveal-delay:200ms" class="relative">
+            <span
+              class="font-display mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-card text-lg font-semibold text-amber">3</span>
+            <h3 class="font-display text-xl font-semibold tracking-tight">The entry is half-written already</h3>
+            <p class="mt-3 leading-relaxed text-ink-soft text-pretty">
+              You open it and the photos, the date and the place are waiting. Type, or dictate it out loud while
+              you're walking. Two minutes and the memory is kept.
+            </p>
+          </li>
+        </ol>
       </div>
+    </section>
+
+    <!-- ============================= FEATURES BENTO ============================= -->
+    <section id="features" class="px-5 py-24 sm:px-8 md:py-32">
+      <div class="mx-auto max-w-6xl">
+        <div class="mx-auto max-w-2xl text-center">
+          <p data-reveal class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber">Features</p>
+          <h2 data-reveal style="--reveal-delay:60ms"
+            class="font-display text-3xl leading-[1.14] font-semibold tracking-[-0.02em] text-balance sm:text-4xl md:text-[2.7rem]">
+            Everything you need to keep the habit
+          </h2>
+        </div>
+
+        <div class="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+          <!-- Hero cell -->
+          <article data-reveal
+            class="group relative overflow-hidden rounded-3xl border border-line bg-card p-6 shadow-lift sm:col-span-2 sm:p-9">
+            <div aria-hidden="true" class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-50 blur-2xl"
+              style="background: radial-gradient(closest-side, color-mix(in srgb, var(--amber-glow) 45%, transparent), transparent);">
+            </div>
+            <div class="relative">
+              <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-glow/20 text-amber">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true" class="h-5 w-5">
+                  <path d="M12 3v1.5M12 19.5V21M4.2 4.2l1.1 1.1M18.7 18.7l1.1 1.1M3 12h1.5M19.5 12H21M4.2 19.8l1.1-1.1M18.7 5.3l1.1-1.1" />
+                  <circle cx="12" cy="12" r="4.5" />
+                </svg>
+              </span>
+              <h3 class="font-display mt-5 text-2xl font-semibold tracking-tight">Trip &amp; event detection</h3>
+              <p class="mt-3 max-w-lg leading-relaxed text-ink-soft text-pretty">
+                The part no other journal does. Memoires watches for clusters of photos that look like something
+                happened — a trip, a party, a long day out — and surfaces them as entries waiting to be written. The
+                analysis happens on your iPhone, including in the background, and your photos are never uploaded.
+              </p>
+            </div>
+          </article>
+
+          <!-- Photo memories -->
+          <article data-reveal style="--reveal-delay:80ms"
+            class="rounded-3xl border border-line bg-card p-6 shadow-lift sm:p-7">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-glow/20 text-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" class="h-5 w-5">
+                <rect x="3" y="3" width="18" height="18" rx="2.5" />
+                <circle cx="8.5" cy="8.5" r="1.6" />
+                <path d="m21 15.5-4.5-4.5L6 21" />
+              </svg>
+            </span>
+            <h3 class="font-display mt-5 text-xl font-semibold tracking-tight">Photo-led entries</h3>
+            <p class="mt-2.5 leading-relaxed text-ink-soft text-pretty">
+              Pull in shots straight from your camera roll, or take one in the app. The picture carries the entry.
+            </p>
+          </article>
+
+          <!-- Dictation -->
+          <article data-reveal style="--reveal-delay:120ms"
+            class="rounded-3xl border border-line bg-card p-6 shadow-lift sm:p-7">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-glow/20 text-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" class="h-5 w-5">
+                <rect x="9" y="2" width="6" height="11" rx="3" />
+                <path d="M5 10.5a7 7 0 0 0 14 0M12 17.5V21" />
+              </svg>
+            </span>
+            <h3 class="font-display mt-5 text-xl font-semibold tracking-tight">Voice dictation</h3>
+            <p class="mt-2.5 leading-relaxed text-ink-soft text-pretty">
+              Talk instead of typing. For most languages the transcription runs on your device, so the audio goes
+              nowhere.
+            </p>
+          </article>
+
+          <!-- Refine with AI -->
+          <article data-reveal style="--reveal-delay:160ms"
+            class="rounded-3xl border border-line bg-card p-6 shadow-lift sm:p-7">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-glow/20 text-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" class="h-5 w-5">
+                <path d="m12 3 1.9 4.9L19 9.8l-4.1 2.4L14 17l-2-3.4L8 17l.9-4.8L5 9.8l5.1-1.9z" />
+                <path d="M19 3v3M20.5 4.5h-3" />
+              </svg>
+            </span>
+            <h3 class="font-display mt-5 text-xl font-semibold tracking-tight">Refine with AI</h3>
+            <p class="mt-2.5 leading-relaxed text-ink-soft text-pretty">
+              Tidy up a rambling entry into something readable. Optional, premium, and only ever on the one entry you
+              tap it for.
+            </p>
+          </article>
+
+          <!-- Timeline & calendar -->
+          <article data-reveal style="--reveal-delay:80ms"
+            class="rounded-3xl border border-line bg-card p-6 shadow-lift sm:p-7">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-glow/20 text-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" class="h-5 w-5">
+                <rect x="3" y="4.5" width="18" height="16.5" rx="2.5" />
+                <path d="M3 9.5h18M8 2.5v4M16 2.5v4" />
+              </svg>
+            </span>
+            <h3 class="font-display mt-5 text-xl font-semibold tracking-tight">Timeline &amp; calendar</h3>
+            <p class="mt-2.5 leading-relaxed text-ink-soft text-pretty">
+              Scroll your life as a stream, or step back and see it laid out month by month.
+            </p>
+          </article>
+
+          <!-- Mood & place -->
+          <article data-reveal style="--reveal-delay:120ms"
+            class="rounded-3xl border border-line bg-card p-6 shadow-lift sm:p-7">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-glow/20 text-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" class="h-5 w-5">
+                <path d="M20 10.5c0 5.4-8 11-8 11s-8-5.6-8-11a8 8 0 1 1 16 0Z" />
+                <circle cx="12" cy="10.5" r="2.8" />
+              </svg>
+            </span>
+            <h3 class="font-display mt-5 text-xl font-semibold tracking-tight">Mood &amp; place</h3>
+            <p class="mt-2.5 leading-relaxed text-ink-soft text-pretty">
+              Tag how the day felt and where it happened. Location is stored inside the entry, on your device — never
+              sent to a server.
+            </p>
+          </article>
+
+          <!-- Search -->
+          <article data-reveal style="--reveal-delay:160ms"
+            class="rounded-3xl border border-line bg-card p-6 shadow-lift sm:p-7">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-glow/20 text-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" class="h-5 w-5">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.9-3.9" />
+              </svg>
+            </span>
+            <h3 class="font-display mt-5 text-xl font-semibold tracking-tight">Find any memory</h3>
+            <p class="mt-2.5 leading-relaxed text-ink-soft text-pretty">
+              Search across everything you've written — a name, a city, a feeling — and land straight on the day.
+            </p>
+          </article>
+
+          <!-- Lock & sync -->
+          <article data-reveal style="--reveal-delay:200ms"
+            class="rounded-3xl border border-line bg-card p-6 shadow-lift sm:col-span-2 sm:p-7 lg:col-span-1">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-glow/20 text-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" class="h-5 w-5">
+                <rect x="4" y="10.5" width="16" height="10.5" rx="2.5" />
+                <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+              </svg>
+            </span>
+            <h3 class="font-display mt-5 text-xl font-semibold tracking-tight">Locked, and yours</h3>
+            <p class="mt-2.5 leading-relaxed text-ink-soft text-pretty">
+              Face ID on the app if you want it, and optional iCloud sync across your own devices.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= SCREENSHOT RAIL ============================= -->
+    <section aria-labelledby="shots-title" class="border-y border-line bg-paper-deep/50 py-24 md:py-32">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8">
+        <div class="max-w-2xl">
+          <p data-reveal class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber">A look inside</p>
+          <h2 id="shots-title" data-reveal style="--reveal-delay:60ms"
+            class="font-display text-3xl leading-[1.14] font-semibold tracking-[-0.02em] text-balance sm:text-4xl md:text-[2.7rem]">
+            Built to be lived in
+          </h2>
+        </div>
+      </div>
+
+      <!-- Native horizontal scroll: keyboard-reachable, no autoplay, no carousel JS -->
+      <div data-reveal style="--reveal-delay:120ms" class="rail mt-14 overflow-x-auto pb-4"
+        tabindex="0" role="group" aria-label="Screenshots of Memoires. Scroll horizontally to see more.">
+        <ul class="flex w-max gap-5 px-5 sm:px-8 lg:px-[max(2rem,calc((100vw-72rem)/2))]">
+          <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
+            <div class="overflow-hidden rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
+              <img src="assets/shots/detail.webp" width="644" height="1400" loading="lazy" decoding="async"
+                alt="An entry titled Sunday at the Park, with a large photo of a lemon tree, a mood of Joyful and a few paragraphs of writing."
+                class="w-full rounded-[1.7rem]">
+            </div>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">An entry, with the photos that started it</p>
+          </li>
+          <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
+            <div class="overflow-hidden rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
+              <img src="assets/shots/editor.webp" width="644" height="1400" loading="lazy" decoding="async"
+                alt="The Memoires editor, showing a text entry being composed with formatting and photo controls."
+                class="w-full rounded-[1.7rem]">
+            </div>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">A calm, uncluttered editor</p>
+          </li>
+          <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
+            <div class="overflow-hidden rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
+              <img src="assets/shots/dictation.webp" width="644" height="1400" loading="lazy" decoding="async"
+                alt="Voice dictation in Memoires, transcribing speech into an entry live as it is spoken."
+                class="w-full rounded-[1.7rem]">
+            </div>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Dictate it while you walk</p>
+          </li>
+          <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
+            <div class="overflow-hidden rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
+              <img src="assets/shots/calendar.webp" width="644" height="1400" loading="lazy" decoding="async"
+                alt="The calendar view in Memoires, showing a month grid with days that contain entries marked."
+                class="w-full rounded-[1.7rem]">
+            </div>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Your months, at a glance</p>
+          </li>
+          <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
+            <div class="overflow-hidden rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
+              <img src="assets/shots/ai-refine.webp" width="644" height="1400" loading="lazy" decoding="async"
+                alt="The Refine with AI screen, offering a cleaned-up version of a journal entry alongside the original."
+                class="w-full rounded-[1.7rem]">
+            </div>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Refine a rambling entry</p>
+          </li>
+          <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
+            <div class="overflow-hidden rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
+              <img src="assets/shots/search.webp" width="644" height="1400" loading="lazy" decoding="async"
+                alt="Search results in Memoires, listing matching entries with their dates and thumbnails."
+                class="w-full rounded-[1.7rem]">
+            </div>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Search everything you've kept</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================= PRIVACY (inverted) ============================= -->
+    <section id="privacy" class="px-5 py-24 sm:px-8 md:py-32">
+      <div class="grain relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-deep px-6 py-16 text-deep-ink sm:px-12 md:px-16 md:py-24">
+        <div aria-hidden="true" class="pointer-events-none absolute -left-20 -top-20 h-80 w-80 rounded-full opacity-25 blur-3xl"
+          style="background: radial-gradient(closest-side, var(--amber-glow), transparent);"></div>
+
+        <div class="relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <p data-reveal class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber-glow">Privacy</p>
+            <h2 data-reveal style="--reveal-delay:60ms"
+              class="font-display text-3xl leading-[1.12] font-semibold tracking-[-0.02em] text-balance sm:text-4xl md:text-[2.7rem]">
+              A journal you can be honest in.
+            </h2>
+            <p data-reveal style="--reveal-delay:120ms" class="mt-6 leading-relaxed text-deep-ink-soft text-pretty">
+              Reading someone's photo library is a lot to ask. So the rule is simple: the scanning happens on your
+              iPhone and the results stay there. We built the business on subscriptions, not on you.
+            </p>
+            <a data-reveal style="--reveal-delay:180ms" href="privacy/"
+              class="mt-8 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-deep-ink/25 px-5 text-sm font-semibold text-deep-ink transition-colors duration-200 hover:bg-deep-ink/10">
+              Read the full privacy policy
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" class="h-4 w-4">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+
+          <dl class="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+            <div data-reveal>
+              <dt class="font-display text-lg font-semibold">Stored on your device</dt>
+              <dd class="mt-2 leading-relaxed text-deep-ink-soft text-pretty">Entries, photos, moods and places live
+                locally in the app. iCloud sync is off until you turn it on.</dd>
+            </div>
+            <div data-reveal style="--reveal-delay:80ms">
+              <dt class="font-display text-lg font-semibold">Photos are never uploaded</dt>
+              <dd class="mt-2 leading-relaxed text-deep-ink-soft text-pretty">Not for scanning, not for suggestions,
+                not for anything. They do not leave your iPhone.</dd>
+            </div>
+            <div data-reveal style="--reveal-delay:120ms">
+              <dt class="font-display text-lg font-semibold">One clearly-marked exception</dt>
+              <dd class="mt-2 leading-relaxed text-deep-ink-soft text-pretty">Refine with AI sends the text of that one
+                entry to be rewritten, and only when you tap it. Nothing else goes with it.</dd>
+            </div>
+            <div data-reveal style="--reveal-delay:180ms">
+              <dt class="font-display text-lg font-semibold">No ads, no profiling</dt>
+              <dd class="mt-2 leading-relaxed text-deep-ink-soft text-pretty">No advertising, no selling data, no
+                tracking you across other apps. Anonymous usage stats can be switched off.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= ON THE HORIZON ============================= -->
+    <section id="horizon" class="border-t border-line bg-paper-deep/50 px-5 py-24 sm:px-8 md:py-32">
+      <div class="mx-auto max-w-6xl">
+        <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <p data-reveal
+              class="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-glow/40 bg-amber-glow/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-amber">
+              In development
+            </p>
+            <h2 data-reveal style="--reveal-delay:60ms"
+              class="font-display text-3xl leading-[1.12] font-semibold tracking-[-0.02em] text-balance sm:text-4xl md:text-[2.7rem]">
+              One day, your year arrives in the post.
+            </h2>
+            <p data-reveal style="--reveal-delay:120ms" class="mt-6 text-lg leading-relaxed text-ink-soft text-pretty">
+              We're working on connecting Memoires to photo album printers, so the year you've been quietly writing can
+              come back as an object you can hold — once a year, or after a trip worth keeping on a shelf. A journal
+              that ends up on paper is a journal that outlives the phone it was written on.
+            </p>
+            <p data-reveal style="--reveal-delay:180ms" class="mt-5 text-sm text-ink-soft">
+              Not available yet. It's on the roadmap, and the app you can download today doesn't include it.
+            </p>
+          </div>
+
+          <div data-reveal style="--reveal-delay:150ms" class="relative">
+            <!-- A printed page, mocked up in CSS: a stack of leaves with the
+                 top one showing a photo and its caption. -->
+            <div class="relative mx-auto w-full max-w-[26rem] px-4 sm:px-0">
+              <div aria-hidden="true"
+                class="absolute inset-0 translate-x-4 translate-y-5 rotate-[4deg] rounded-xl border border-line bg-card/60 shadow-lift"></div>
+              <div aria-hidden="true"
+                class="absolute inset-0 translate-x-2 translate-y-2.5 rotate-[2deg] rounded-xl border border-line bg-card/80 shadow-lift"></div>
+
+              <figure class="relative rounded-xl border border-line bg-card p-4 shadow-lift sm:p-5">
+                <img src="assets/album-photo.webp" width="880" height="553" loading="lazy" decoding="async"
+                  alt="A printed page mock-up: a photograph of sunlit lemon-tree leaves above a handwritten-style caption."
+                  class="aspect-3/2 w-full rounded-md object-cover">
+                <figcaption class="pt-5">
+                  <p class="font-display text-lg font-semibold tracking-tight">Sunday at the Park</p>
+                  <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">
+                    Today was one of those days I don't want to forget. We were chasing pigeons for a full hour…
+                  </p>
+                </figcaption>
+                <div class="mt-5 flex items-baseline justify-between border-t border-line-soft pt-4">
+                  <span class="font-display text-base font-semibold tracking-tight">Twenty twenty-six</span>
+                  <span class="text-xs tracking-wide text-ink-soft">Page 34</span>
+                </div>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= FINAL CTA ============================= -->
+    <section class="grain relative overflow-hidden px-5 py-28 sm:px-8 md:py-36">
+      <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 h-[30rem] opacity-70"
+        style="background: radial-gradient(55% 60% at 50% 90%, color-mix(in srgb, var(--amber-glow) 28%, transparent), transparent 70%);">
+      </div>
+
+      <div class="relative mx-auto max-w-2xl text-center">
+        <img src="assets/appicon-192.webp" alt="" width="64" height="64"
+          class="mx-auto mb-8 h-16 w-16 rounded-2xl shadow-lift">
+        <h2 data-reveal
+          class="font-display text-4xl leading-[1.08] font-semibold tracking-[-0.025em] text-balance sm:text-5xl md:text-[3.4rem]">
+          Start with the photos you already have.
+        </h2>
+        <p data-reveal style="--reveal-delay:80ms" class="mt-6 text-lg leading-relaxed text-ink-soft text-pretty">
+          You don't need a new habit or a blank page. You need something that notices for you. Free to start, on
+          iPhone.
+        </p>
+
+        <div data-reveal style="--reveal-delay:140ms" class="mt-10 flex justify-center">
+          <a href="https://apps.apple.com/app/memoires/id6760226058" target="_blank" rel="noopener"
+            class="inline-flex min-h-14 cursor-pointer items-center justify-center gap-3 rounded-2xl bg-ink px-8 text-paper shadow-lift transition-all duration-200 hover:opacity-90 active:scale-[0.98]">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-7 w-7 shrink-0">
+              <path
+                d="M17.05 12.54c-.02-2.4 1.96-3.55 2.05-3.61-1.12-1.63-2.86-1.86-3.48-1.89-1.48-.15-2.89.87-3.64.87-.75 0-1.91-.85-3.14-.83-1.61.02-3.1.94-3.93 2.38-1.68 2.91-.43 7.22 1.2 9.58.8 1.16 1.75 2.46 3 2.41 1.21-.05 1.67-.78 3.13-.78 1.46 0 1.87.78 3.14.75 1.3-.02 2.12-1.18 2.91-2.34.92-1.34 1.3-2.64 1.32-2.71-.03-.01-2.53-.97-2.56-3.83zM14.7 5.09c.66-.81 1.11-1.93.99-3.05-.95.04-2.11.64-2.8 1.44-.61.71-1.15 1.85-1.01 2.94 1.06.08 2.15-.54 2.82-1.33z" />
+            </svg>
+            <span class="text-left leading-none">
+              <span class="block text-[0.65rem] font-medium tracking-wide opacity-75">Download on the</span>
+              <span class="mt-1 block text-lg font-semibold tracking-tight">App Store</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================= FOOTER ============================= -->
+  <footer class="border-t border-line px-5 py-12 sm:px-8">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row md:items-start">
+      <div class="text-center md:text-left">
+        <div class="flex items-center justify-center gap-2.5 md:justify-start">
+          <img src="assets/appicon-192.webp" alt="" width="32" height="32" class="h-7 w-7 rounded-lg">
+          <span class="font-display text-lg font-semibold tracking-tight">Memoires</span>
+        </div>
+        <p class="mt-3 text-sm text-ink-soft">A journal that starts where your photos are.</p>
+      </div>
+
+      <nav aria-label="Footer" class="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+        <a href="#features" class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Features</a>
+        <a href="privacy/" class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Privacy</a>
+        <a href="terms/" class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Terms</a>
+        <a href="mailto:hello@memoires.app"
+          class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Contact</a>
+        <a href="https://apps.apple.com/app/memoires/id6760226058" target="_blank" rel="noopener"
+          class="inline-flex min-h-11 items-center text-sm font-medium text-amber transition-opacity duration-200 hover:opacity-80">App Store</a>
+      </nav>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Memoires. All rights reserved.</span>
-      <span>Made with care for people who remember.</span>
-    </div>
+
+    <p class="mx-auto mt-10 max-w-6xl text-center text-xs text-ink-soft md:text-left">
+      &copy; <span id="year">2026</span> Memoires. Made for iPhone.
+    </p>
   </footer>
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" aria-label="Close">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <line x1="18" y1="6" x2="6" y2="18" />
-        <line x1="6" y1="6" x2="18" y2="18" />
-      </svg>
-    </button>
-    <button class="lightbox-nav lightbox-prev" aria-label="Previous">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round">
-        <polyline points="15 18 9 12 15 6" />
-      </svg>
-    </button>
-    <img src="" alt="Screenshot preview">
-    <button class="lightbox-nav lightbox-next" aria-label="Next">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round">
-        <polyline points="9 6 15 12 9 18" />
-      </svg>
-    </button>
-  </div>
-
   <script>
-    // Nav scroll effect
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    });
+    (function () {
+      document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile menu toggle
-    const toggle = document.getElementById('navToggle');
-    const links = document.getElementById('navLinks');
-    toggle.addEventListener('click', () => {
-      links.classList.toggle('open');
-    });
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => links.classList.remove('open'));
-    });
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (reduced.matches || !('IntersectionObserver' in window)) return;
 
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      // Only hide-then-reveal once we know we can animate and observe.
+      document.documentElement.classList.add('js-reveal');
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
 
-    // Lightbox
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-    const screenshots = Array.from(document.querySelectorAll('.screenshot-frame img'));
-    let currentIndex = 0;
-
-    function openLightbox(index) {
-      currentIndex = index;
-      lightboxImg.src = screenshots[index].src;
-      lightboxImg.alt = screenshots[index].alt;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    function navigateLightbox(dir) {
-      currentIndex = (currentIndex + dir + screenshots.length) % screenshots.length;
-      lightboxImg.src = screenshots[currentIndex].src;
-      lightboxImg.alt = screenshots[currentIndex].alt;
-    }
-
-    screenshots.forEach((img, i) => {
-      img.closest('.screenshot-frame').addEventListener('click', () => openLightbox(i));
-    });
-
-    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-    lightbox.querySelector('.lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
-    lightbox.querySelector('.lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
-    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('active')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') navigateLightbox(-1);
-      if (e.key === 'ArrowRight') navigateLightbox(1);
-    });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
   </script>
 </body>
 
