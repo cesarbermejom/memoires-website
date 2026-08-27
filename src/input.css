@@ -32,7 +32,14 @@
     --deep-ink-soft: #B3A697;
 
     --shadow-lift: 0 1px 2px rgb(31 27 22 / 0.04), 0 12px 32px -8px rgb(31 27 22 / 0.10);
+    --shadow-hover: 0 2px 4px rgb(31 27 22 / 0.05), 0 20px 44px -12px rgb(31 27 22 / 0.18);
     --shadow-phone: 0 2px 8px rgb(31 27 22 / 0.06), 0 32px 64px -16px rgb(31 27 22 / 0.22);
+
+    /* Motion. The built-in CSS easings are too weak to read as intentional;
+       these are the stronger variants. `ease-in` is deliberately absent —
+       it delays the first frame, which is exactly where the eye is. */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -54,6 +61,7 @@
       --deep-ink-soft: #B3A697;
 
       --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -8px rgb(0 0 0 / 0.5);
+      --shadow-hover: 0 2px 4px rgb(0 0 0 / 0.5), 0 20px 44px -12px rgb(0 0 0 / 0.65);
       --shadow-phone: 0 2px 8px rgb(0 0 0 / 0.5), 0 32px 64px -16px rgb(0 0 0 / 0.7);
     }
   }
@@ -130,29 +138,140 @@
 
   /* Scroll reveal. Elements start visible and are hidden by JS only when
      it is safe to animate them — so no-JS and reduced-motion users always
-     get the final readable state. */
+     get the final readable state.
+
+     520ms with 14px of travel: this is explanatory pacing, not a UI
+     response, so it can run past the 300ms UI budget — but 700ms/20px
+     read as sluggish, and the shorter distance is what makes it "soft". */
   .js-reveal [data-reveal] {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(14px);
   }
 
   .js-reveal [data-reveal].is-in {
     opacity: 1;
     transform: none;
     transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 520ms var(--ease-out),
+      transform 520ms var(--ease-out);
     transition-delay: var(--reveal-delay, 0ms);
   }
 
+  /* Hover lift for cards.
+     The shadow lives on a pseudo-element so the hover animates opacity
+     instead of box-shadow — box-shadow repaints, opacity composites.
+     Gated behind a real pointer: on touch, :hover latches after a tap. */
+  .lift {
+    position: relative;
+    transition:
+      transform 200ms var(--ease-out),
+      border-color 200ms ease;
+  }
+
+  /* The reveal owns `transform` on these same cards, and its settled rule
+     (`transform: none`) outranks `.lift:hover`. The reveal is a one-shot, so
+     the JS strips its hooks once it has played and hands `transform` back. */
+
+  .lift::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: var(--shadow-hover);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lift:hover { transform: translateY(-3px); }
+    .lift:hover::before { opacity: 1; }
+  }
+
+  /* Press feedback on the pressable lifts. Declared after :hover so a press
+     wins while the pointer is still over the element, and faster than the
+     hover — the system responds immediately, it only settles slowly. */
+  [data-lightbox]:active {
+    transform: scale(0.98);
+    transition-duration: 120ms;
+  }
+
+  /* Screenshot lightbox.
+     Enter 280ms / exit 190ms — the system should get out of the way faster
+     than it arrives. transform-origin stays centred: a modal is not
+     anchored to its trigger the way a popover is. */
+  .lightbox {
+    margin: auto;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    /* The screenshots have a fixed 644:1400 ratio, so capping the width by
+       viewport height too keeps the whole phone on screen instead of letting
+       max-height crop it. 40vh ≈ 87vh once the ratio is applied. */
+    width: min(92vw, 22rem, 40vh);
+    overflow: visible;
+
+    opacity: 0;
+    transform: scale(0.97);
+    transition:
+      opacity 190ms var(--ease-out),
+      transform 190ms var(--ease-out),
+      display 190ms allow-discrete,
+      overlay 190ms allow-discrete;
+  }
+
+  .lightbox[open] {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 280ms var(--ease-out),
+      transform 280ms var(--ease-out),
+      display 280ms allow-discrete,
+      overlay 280ms allow-discrete;
+  }
+
+  /* Never from scale(0) — things do not appear out of nothing. */
+  @starting-style {
+    .lightbox[open] {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+
+  .lightbox::backdrop {
+    background: rgb(20 16 13 / 0.55);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition:
+      opacity 190ms var(--ease-out),
+      display 190ms allow-discrete,
+      overlay 190ms allow-discrete;
+  }
+
+  .lightbox[open]::backdrop {
+    opacity: 1;
+    transition:
+      opacity 280ms var(--ease-out),
+      display 280ms allow-discrete,
+      overlay 280ms allow-discrete;
+  }
+
+  @starting-style {
+    .lightbox[open]::backdrop { opacity: 0; }
+  }
+
+  /* Reduced motion means fewer and gentler animations, not none: opacity
+     still carries the state change, movement and scaling are dropped. */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .js-reveal [data-reveal] { opacity: 1; transform: none; }
     .js-reveal [data-reveal].is-in { transition: none; }
+    .lift:hover { transform: none; }
+    .lightbox,
+    .lightbox[open] { transform: none; }
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
     }
   }
 
