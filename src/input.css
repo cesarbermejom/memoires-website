@@ -67,9 +67,14 @@
   }
 
   html {
+    /* Tells the UA to theme scrollbars, form controls and the overscroll
+       gutter to match. Without it those stay light on a dark page. */
+    color-scheme: light dark;
     scroll-behavior: smooth;
     /* Sticky nav must not cover anchor targets */
     scroll-padding-top: 5.5rem;
+    /* Reserve the scrollbar so locking scroll for the modal shifts nothing */
+    scrollbar-gutter: stable;
   }
 
   body {
@@ -78,6 +83,34 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  /* Scroll lock while the modal is open. */
+  body.is-locked {
+    overflow: hidden;
+  }
+
+  /* Removes the 300ms double-tap-zoom wait on everything tappable, and
+     replaces the default grey flash with our own :active feedback. */
+  a,
+  button,
+  summary,
+  [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* The page is viewport-fit=cover, so it paints under the notch and the
+     home indicator. `.gutter` keeps content clear of both without shrinking
+     the full-bleed section backgrounds. */
+  .gutter {
+    padding-inline: max(1.25rem, env(safe-area-inset-left), env(safe-area-inset-right));
+  }
+
+  @media (min-width: 40rem) {
+    .gutter {
+      padding-inline: max(2rem, env(safe-area-inset-left), env(safe-area-inset-right));
+    }
   }
 
   /* Newsreader carries an optical-size axis (6–72). Leaving optical sizing
@@ -210,6 +243,8 @@
        max-height crop it. 40vh ≈ 87vh once the ratio is applied. */
     width: min(92vw, 22rem, 40vh);
     overflow: visible;
+    /* Stops a scroll gesture inside the modal chaining to the page behind */
+    overscroll-behavior: contain;
 
     opacity: 0;
     transform: scale(0.97);

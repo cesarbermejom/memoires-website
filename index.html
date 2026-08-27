@@ -49,10 +49,10 @@
   <!-- ============================= NAV ============================= -->
   <header
     class="sticky top-0 z-50 border-b border-line/70 bg-paper/95 backdrop-blur-xl supports-[backdrop-filter]:bg-paper/88">
-    <nav aria-label="Main" class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8 md:h-20">
+    <nav aria-label="Main" class="mx-auto flex h-16 max-w-6xl items-center justify-between gutter md:h-20">
       <a href="#main" class="group flex min-h-11 items-center gap-2.5">
         <img src="assets/appicon-192.webp" alt="" width="36" height="36" class="h-8 w-8 rounded-[9px] md:h-9 md:w-9">
-        <span class="font-display text-xl font-semibold tracking-tight md:text-2xl">Memoires</span>
+        <span translate="no" class="font-display text-xl font-semibold tracking-tight md:text-2xl">Memoires</span>
       </a>
 
       <div class="hidden items-center gap-8 md:flex">
@@ -60,7 +60,7 @@
           works</a>
         <a href="#features" class="text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Features</a>
         <a href="#privacy" class="text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Privacy</a>
-        <a href="#horizon" class="text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">What's
+        <a href="#horizon" class="text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">What’s
           next</a>
       </div>
 
@@ -79,7 +79,7 @@
   <main id="main">
 
     <!-- ============================= HERO ============================= -->
-    <section class="grain relative overflow-hidden px-5 pt-16 pb-20 sm:px-8 md:pt-24 md:pb-28 lg:pt-28">
+    <section class="grain relative overflow-hidden gutter pt-16 pb-20 md:pt-24 md:pb-28 lg:pt-28">
       <!-- warm light bloom, decorative -->
       <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 -top-40 h-[38rem] opacity-70"
         style="background: radial-gradient(60% 55% at 50% 40%, color-mix(in srgb, var(--amber-glow) 26%, transparent), transparent 70%);">
@@ -172,7 +172,7 @@
 
     <!-- ============================= TRUST STRIP ============================= -->
     <section aria-label="What Memoires does with your data" class="border-y border-line bg-paper-deep/60">
-      <ul class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-3 px-5 py-5 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-8 sm:px-8">
+      <ul class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-3 gutter py-5 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-8">
         <li class="flex items-center gap-2 text-sm font-medium text-ink-soft">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" aria-hidden="true" class="h-4 w-4 text-amber">
@@ -205,7 +205,7 @@
     </section>
 
     <!-- ============================= THE INSIGHT ============================= -->
-    <section class="px-5 py-24 sm:px-8 md:py-32">
+    <section class="gutter py-24 md:py-32">
       <div class="mx-auto max-w-3xl text-center">
         <p data-reveal class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber">Why journals fail</p>
         <h2 data-reveal style="--reveal-delay:60ms"
@@ -213,7 +213,7 @@
           A blank page on a Tuesday night is a terrible way to remember your life.
         </h2>
         <p data-reveal style="--reveal-delay:120ms" class="mt-7 text-lg leading-relaxed text-ink-soft text-pretty">
-          Most journalling apps hand you an empty box and hope you feel inspired. You don't, so you stop — and the year
+          Most journalling apps hand you an empty box and hope you feel inspired. You don’t, so you stop — and the year
           disappears anyway. Memoires starts from the opposite end: from the thousands of photos you already took,
           which are a far better record of what actually happened than your memory of a Tuesday.
         </p>
@@ -221,7 +221,7 @@
     </section>
 
     <!-- ============================= HOW IT WORKS ============================= -->
-    <section id="how" class="border-y border-line bg-paper-deep/50 px-5 py-24 sm:px-8 md:py-32">
+    <section id="how" class="border-y border-line bg-paper-deep/50 gutter py-24 md:py-32">
       <div class="mx-auto max-w-6xl">
         <div class="mx-auto max-w-2xl text-center">
           <p data-reveal class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber">How it works</p>
@@ -238,7 +238,7 @@
             <h3 class="font-display text-xl font-semibold tracking-tight">Memoires looks through your photos</h3>
             <p class="mt-3 leading-relaxed text-ink-soft text-pretty">
               In the background, entirely on your iPhone, it groups recent photos by time and place to spot a weekend
-              away, a birthday, a day that clearly wasn't ordinary. Nothing is uploaded to do this.
+              away, a birthday, a day that clearly wasn’t ordinary. Nothing is uploaded to do this.
             </p>
           </li>
           <li data-reveal style="--reveal-delay:70ms" class="relative">
@@ -246,7 +246,7 @@
               class="font-display mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-card text-lg font-semibold text-amber">2</span>
             <h3 class="font-display text-xl font-semibold tracking-tight">It nudges you at the right moment</h3>
             <p class="mt-3 leading-relaxed text-ink-soft text-pretty">
-              A quiet local notification: <em class="not-italic text-ink">you haven't written about Lisbon yet</em>.
+              A quiet local notification: <em class="not-italic text-ink">you haven’t written about Lisbon yet</em>.
               Plus a daily reminder if you want one. Scheduled on your device — no push server involved.
             </p>
           </li>
@@ -256,7 +256,7 @@
             <h3 class="font-display text-xl font-semibold tracking-tight">The entry is half-written already</h3>
             <p class="mt-3 leading-relaxed text-ink-soft text-pretty">
               You open it and the photos, the date and the place are waiting. Type, or dictate it out loud while
-              you're walking. Two minutes and the memory is kept.
+              you’re walking. Two minutes and the memory is kept.
             </p>
           </li>
         </ol>
@@ -264,7 +264,7 @@
     </section>
 
     <!-- ============================= FEATURES BENTO ============================= -->
-    <section id="features" class="px-5 py-24 sm:px-8 md:py-32">
+    <section id="features" class="gutter py-24 md:py-32">
       <div class="mx-auto max-w-6xl">
         <div class="mx-auto max-w-2xl text-center">
           <p data-reveal class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber">Features</p>
@@ -397,7 +397,7 @@
             </span>
             <h3 class="font-display mt-5 text-xl font-semibold tracking-tight">Find any memory</h3>
             <p class="mt-2.5 leading-relaxed text-ink-soft text-pretty">
-              Search across everything you've written — a name, a city, a feeling — and land straight on the day.
+              Search across everything you’ve written — a name, a city, a feeling — and land straight on the day.
             </p>
           </article>
 
@@ -413,7 +413,7 @@
             </span>
             <h3 class="font-display mt-5 text-xl font-semibold tracking-tight">Locked, and yours</h3>
             <p class="mt-2.5 leading-relaxed text-ink-soft text-pretty">
-              Face ID on the app if you want it, and optional iCloud sync across your own devices.
+              Face&nbsp;ID on the app if you want it, and optional iCloud sync across your own devices.
             </p>
           </article>
 
@@ -423,7 +423,7 @@
 
     <!-- ============================= SCREENSHOT RAIL ============================= -->
     <section aria-labelledby="shots-title" class="border-y border-line bg-paper-deep/50 py-24 md:py-32">
-      <div class="mx-auto max-w-6xl px-5 sm:px-8">
+      <div class="mx-auto max-w-6xl gutter">
         <div class="max-w-2xl">
           <p data-reveal class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber">A look inside</p>
           <h2 id="shots-title" data-reveal style="--reveal-delay:60ms"
@@ -436,7 +436,7 @@
       <!-- Native horizontal scroll: keyboard-reachable, no autoplay, no carousel JS -->
       <div data-reveal style="--reveal-delay:120ms" class="rail mt-14 overflow-x-auto pb-4"
         tabindex="0" role="group" aria-label="Screenshots of Memoires. Scroll horizontally to see more.">
-        <ul class="flex w-max gap-5 px-5 sm:px-8 lg:px-[max(2rem,calc((100vw-72rem)/2))]">
+        <ul class="flex w-max gap-5 gutter lg:px-[max(2rem,calc((100vw-72rem)/2))]">
           <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
             <button type="button" data-lightbox data-src="assets/shots/detail.webp" data-alt="An entry titled Sunday at the Park, with a large photo of a lemon tree, a mood of Joyful and a few paragraphs of writing."
               aria-label="An entry, with the photos that started it. Open a larger view."
@@ -484,19 +484,19 @@
           </li>
           <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
             <button type="button" data-lightbox data-src="assets/shots/search.webp" data-alt="Search results in Memoires, listing matching entries with their dates and thumbnails."
-              aria-label="Search everything you've kept. Open a larger view."
+              aria-label="Search everything you’ve kept. Open a larger view."
               class="lift hover:border-amber-glow/50 block w-full cursor-pointer rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
               <img src="assets/shots/search.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
                 class="w-full rounded-[1.7rem]">
             </button>
-            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Search everything you've kept</p>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Search everything you’ve kept</p>
           </li>
         </ul>
       </div>
     </section>
 
     <!-- ============================= PRIVACY (inverted) ============================= -->
-    <section id="privacy" class="px-5 py-24 sm:px-8 md:py-32">
+    <section id="privacy" class="gutter py-24 md:py-32">
       <div class="grain relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-deep px-6 py-16 text-deep-ink sm:px-12 md:px-16 md:py-24">
         <div aria-hidden="true" class="pointer-events-none absolute -left-20 -top-20 h-80 w-80 rounded-full opacity-25 blur-3xl"
           style="background: radial-gradient(closest-side, var(--amber-glow), transparent);"></div>
@@ -509,7 +509,7 @@
               A journal you can be honest in.
             </h2>
             <p data-reveal style="--reveal-delay:120ms" class="mt-6 leading-relaxed text-deep-ink-soft text-pretty">
-              Reading someone's photo library is a lot to ask. So the rule is simple: the scanning happens on your
+              Reading someone’s photo library is a lot to ask. So the rule is simple: the scanning happens on your
               iPhone and the results stay there. We built the business on subscriptions, not on you.
             </p>
             <a data-reveal style="--reveal-delay:180ms" href="privacy/"
@@ -549,7 +549,7 @@
     </section>
 
     <!-- ============================= ON THE HORIZON ============================= -->
-    <section id="horizon" class="border-t border-line bg-paper-deep/50 px-5 py-24 sm:px-8 md:py-32">
+    <section id="horizon" class="border-t border-line bg-paper-deep/50 gutter py-24 md:py-32">
       <div class="mx-auto max-w-6xl">
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -562,12 +562,12 @@
               One day, your year arrives in the post.
             </h2>
             <p data-reveal style="--reveal-delay:120ms" class="mt-6 text-lg leading-relaxed text-ink-soft text-pretty">
-              We're working on connecting Memoires to photo album printers, so the year you've been quietly writing can
+              We’re working on connecting Memoires to photo album printers, so the year you’ve been quietly writing can
               come back as an object you can hold — once a year, or after a trip worth keeping on a shelf. A journal
               that ends up on paper is a journal that outlives the phone it was written on.
             </p>
             <p data-reveal style="--reveal-delay:180ms" class="mt-5 text-sm text-ink-soft">
-              Not available yet. It's on the roadmap, and the app you can download today doesn't include it.
+              Not available yet. It’s on the roadmap, and the app you can download today doesn’t include it.
             </p>
           </div>
 
@@ -587,7 +587,7 @@
                 <figcaption class="pt-5">
                   <p class="font-display text-lg font-semibold tracking-tight">Sunday at the Park</p>
                   <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">
-                    Today was one of those days I don't want to forget. We were chasing pigeons for a full hour…
+                    Today was one of those days I don’t want to forget. We were chasing pigeons for a full hour…
                   </p>
                 </figcaption>
                 <div class="mt-5 flex items-baseline justify-between border-t border-line-soft pt-4">
@@ -602,7 +602,7 @@
     </section>
 
     <!-- ============================= FINAL CTA ============================= -->
-    <section class="grain relative overflow-hidden px-5 py-28 sm:px-8 md:py-36">
+    <section class="grain relative overflow-hidden gutter py-28 md:py-36">
       <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 h-[30rem] opacity-70"
         style="background: radial-gradient(55% 60% at 50% 90%, color-mix(in srgb, var(--amber-glow) 28%, transparent), transparent 70%);">
       </div>
@@ -615,7 +615,7 @@
           Start with the photos you already have.
         </h2>
         <p data-reveal style="--reveal-delay:80ms" class="mt-6 text-lg leading-relaxed text-ink-soft text-pretty">
-          You don't need a new habit or a blank page. You need something that notices for you. Free to start, on
+          You don’t need a new habit or a blank page. You need something that notices for you. Free to start, on
           iPhone.
         </p>
 
@@ -638,12 +638,12 @@
   </main>
 
   <!-- ============================= FOOTER ============================= -->
-  <footer class="border-t border-line px-5 py-12 sm:px-8">
+  <footer class="border-t border-line gutter pt-12 pb-[max(3rem,env(safe-area-inset-bottom))]">
     <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row md:items-start">
       <div class="text-center md:text-left">
         <div class="flex items-center justify-center gap-2.5 md:justify-start">
           <img src="assets/appicon-192.webp" alt="" width="32" height="32" class="h-7 w-7 rounded-lg">
-          <span class="font-display text-lg font-semibold tracking-tight">Memoires</span>
+          <span translate="no" class="font-display text-lg font-semibold tracking-tight">Memoires</span>
         </div>
         <p class="mt-3 text-sm text-ink-soft">A journal that starts where your photos are.</p>
       </div>
@@ -693,7 +693,15 @@
             dialogImg.src = trigger.dataset.src;
             dialogImg.alt = trigger.dataset.alt;
             dialog.showModal();
+            // showModal() makes the background inert but does not stop it
+            // scrolling. scrollbar-gutter keeps this from shifting layout.
+            document.body.classList.add('is-locked');
           });
+        });
+
+        // Fires for the close button, the backdrop and the Escape key alike.
+        dialog.addEventListener('close', function () {
+          document.body.classList.remove('is-locked');
         });
 
         dialog.querySelector('[data-lightbox-close]')
