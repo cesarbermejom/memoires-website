@@ -72,10 +72,12 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Fraunces is a variable serif: dial in warmth (SOFT) and a touch of
-     the "wonk" that keeps it human rather than fashion-magazine cold. */
+  /* Newsreader carries an optical-size axis (6–72). Leaving optical sizing
+     on `auto` lets the browser track it to the rendered size, so display
+     headlines stay elegant and 18–20px subheads stay sturdy — no fixed
+     font-variation-settings, which would freeze one design for both. */
   .font-display {
-    font-variation-settings: "SOFT" 30, "WONK" 1, "opsz" 96;
+    font-optical-sizing: auto;
   }
 
   :focus-visible {
@@ -104,7 +106,7 @@
   --color-deep-ink: var(--deep-ink);
   --color-deep-ink-soft: var(--deep-ink-soft);
 
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --shadow-lift: var(--shadow-lift);
