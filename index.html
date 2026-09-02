@@ -25,7 +25,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="assets/shots/timeline.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/shots-v2/01-timeline.webp" fetchpriority="high">
   <link
     href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
@@ -95,7 +95,7 @@
           </p>
 
           <h1 data-reveal style="--reveal-delay:60ms"
-            class="font-display text-[2.3rem] leading-[1.06] font-medium tracking-[-0.025em] text-balance sm:text-6xl lg:text-[4.1rem]">
+            class="font-display text-[2.3rem] leading-[1.06] font-medium tracking-[-0.025em] text-balance sm:text-6xl lg:text-[3.4rem] xl:text-[4.1rem]">
             The story is already<br class="hidden sm:block"> in your camera roll.
           </h1>
 
@@ -143,8 +143,8 @@
           </div>
 
           <div class="relative rounded-[2.6rem] border border-line bg-card p-2 shadow-phone">
-            <img src="assets/shots/timeline.webp" width="644" height="1400" fetchpriority="high" decoding="async"
-              alt="The Memoires timeline on iPhone, showing dated journal entries such as Thursday Run and Sunday at the Park, each with its own photo thumbnail."
+            <img src="assets/shots-v2/01-timeline.webp" width="644" height="1400" fetchpriority="high" decoding="async"
+              alt="The Memoires timeline on iPhone. At the top, a card headed Not written yet offers a day in Cadaqués with six photos. Below it, dated entries with their moods and locations."
               class="w-full rounded-[2.1rem]">
           </div>
 
@@ -161,8 +161,8 @@
                 </svg>
               </span>
               <div class="min-w-0">
-                <p class="text-[0.8rem] font-semibold leading-snug">47 photos from last weekend</p>
-                <p class="mt-0.5 text-[0.78rem] leading-snug text-ink-soft">Looks like a trip. Want to write about it?</p>
+                <p class="text-[0.8rem] font-semibold leading-snug">Cadaqués · 6 photos</p>
+                <p class="mt-0.5 text-[0.78rem] leading-snug text-ink-soft">You took them and wrote nothing.</p>
               </div>
             </div>
           </div>
@@ -246,7 +246,7 @@
               class="font-display mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-card text-lg font-semibold text-amber">2</span>
             <h3 class="font-display text-xl font-semibold tracking-tight">It nudges you at the right moment</h3>
             <p class="mt-3 leading-relaxed text-ink-soft text-pretty">
-              A quiet notification: <em class="not-italic text-ink">you haven’t written about Lisbon yet</em>. There’s a
+              A quiet notification: <em class="not-italic text-ink">you haven’t written about Cadaqués yet</em>. There’s a
               daily reminder too, if you want one. Both are scheduled by the phone itself, not sent from a
               server.
             </p>
@@ -293,7 +293,7 @@
                   <circle cx="12" cy="12" r="4.5" />
                 </svg>
               </span>
-              <h3 class="font-display mt-5 text-2xl font-semibold tracking-tight">Trip &amp; event detection</h3>
+              <h3 class="font-display mt-5 text-2xl font-semibold tracking-tight">Found in your photos</h3>
               <p class="mt-3 max-w-lg leading-relaxed text-ink-soft text-pretty">
                 Most journals wait for you to open them. Memoires notices when you have taken a lot of photos in one place
                 over a day or two, and offers you that as an entry to write. It works this out on your iPhone, in the
@@ -440,58 +440,58 @@
         tabindex="0" role="group" aria-label="Screenshots of Memoires. Scroll horizontally to see more.">
         <ul class="flex w-max gap-5 gutter lg:px-[max(2rem,calc((100vw-72rem)/2))]">
           <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
-            <button type="button" data-lightbox data-src="assets/shots/detail.webp" data-alt="An entry titled Sunday at the Park, with a large photo of a lemon tree, a mood of Joyful and a few paragraphs of writing."
+            <button type="button" data-lightbox data-src="assets/shots-v2/04-suggestion.webp" data-alt="The suggestion screen: a day in Cadaqués headed Found in your photos, with six thumbnails and the line You took 6 photos that day and wrote nothing."
+              aria-label="A day it found in your photos. Open a larger view."
+              class="lift hover:border-amber-glow/50 block w-full cursor-pointer rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
+              <img src="assets/shots-v2/04-suggestion.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
+                class="w-full rounded-[1.7rem]">
+            </button>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">A day it found in your photos</p>
+          </li>
+          <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
+            <button type="button" data-lightbox data-src="assets/shots-v2/01-timeline.webp" data-alt="The Memoires timeline, with a Not written yet card at the top and dated entries below, each showing its mood and location."
+              aria-label="The timeline, newest first. Open a larger view."
+              class="lift hover:border-amber-glow/50 block w-full cursor-pointer rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
+              <img src="assets/shots-v2/01-timeline.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
+                class="w-full rounded-[1.7rem]">
+            </button>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">The timeline, newest first</p>
+          </li>
+          <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
+            <button type="button" data-lightbox data-src="assets/shots-v2/02-detail.webp" data-alt="An entry called The road east, with a wide photograph of a waterfall above the writing, a mood of Joyful and the location Goðafoss, Iceland."
               aria-label="An entry, with the photos that started it. Open a larger view."
               class="lift hover:border-amber-glow/50 block w-full cursor-pointer rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
-              <img src="assets/shots/detail.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
+              <img src="assets/shots-v2/02-detail.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
                 class="w-full rounded-[1.7rem]">
             </button>
             <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">An entry, with the photos that started it</p>
           </li>
           <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
-            <button type="button" data-lightbox data-src="assets/shots/editor.webp" data-alt="The Memoires editor, showing a text entry being composed with formatting and photo controls."
-              aria-label="A calm, uncluttered editor. Open a larger view."
+            <button type="button" data-lightbox data-src="assets/shots-v2/05-editor.webp" data-alt="The Memoires editor, showing the entry text with mood chips, photo attachments, a location tag and a Refine with AI row marked Premium."
+              aria-label="Mood, photos and location in one place. Open a larger view."
               class="lift hover:border-amber-glow/50 block w-full cursor-pointer rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
-              <img src="assets/shots/editor.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
+              <img src="assets/shots-v2/05-editor.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
                 class="w-full rounded-[1.7rem]">
             </button>
-            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">A calm, uncluttered editor</p>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Mood, photos and location in one place</p>
           </li>
           <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
-            <button type="button" data-lightbox data-src="assets/shots/dictation.webp" data-alt="Voice dictation in Memoires, transcribing speech into an entry live as it is spoken."
-              aria-label="Dictate it while you walk. Open a larger view."
+            <button type="button" data-lightbox data-src="assets/shots-v2/03-search.webp" data-alt="The search screen, with a search field and a row of mood filters: All, Joyful, Happy, Grateful and Calm."
+              aria-label="Filter by how the day felt. Open a larger view."
               class="lift hover:border-amber-glow/50 block w-full cursor-pointer rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
-              <img src="assets/shots/dictation.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
+              <img src="assets/shots-v2/03-search.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
                 class="w-full rounded-[1.7rem]">
             </button>
-            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Dictate it while you walk</p>
+            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Filter by how the day felt</p>
           </li>
           <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
-            <button type="button" data-lightbox data-src="assets/shots/calendar.webp" data-alt="The calendar view in Memoires, showing a month grid with days that contain entries marked."
+            <button type="button" data-lightbox data-src="assets/shots-v2/09-calendar.webp" data-alt="The calendar view, showing August 2026 with dots marking the days that have entries, and the timeline continuing underneath."
               aria-label="A month at a time. Open a larger view."
               class="lift hover:border-amber-glow/50 block w-full cursor-pointer rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
-              <img src="assets/shots/calendar.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
+              <img src="assets/shots-v2/09-calendar.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
                 class="w-full rounded-[1.7rem]">
             </button>
             <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">A month at a time</p>
-          </li>
-          <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
-            <button type="button" data-lightbox data-src="assets/shots/ai-refine.webp" data-alt="The Refine with AI screen, offering a cleaned-up version of a journal entry alongside the original."
-              aria-label="Refine a rambling entry. Open a larger view."
-              class="lift hover:border-amber-glow/50 block w-full cursor-pointer rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
-              <img src="assets/shots/ai-refine.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
-                class="w-full rounded-[1.7rem]">
-            </button>
-            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Refine a rambling entry</p>
-          </li>
-          <li class="w-[15rem] shrink-0 sm:w-[16.5rem]">
-            <button type="button" data-lightbox data-src="assets/shots/search.webp" data-alt="Search results in Memoires, listing matching entries with their dates and thumbnails."
-              aria-label="Search everything you’ve kept. Open a larger view."
-              class="lift hover:border-amber-glow/50 block w-full cursor-pointer rounded-[2rem] border border-line bg-card p-1.5 shadow-lift">
-              <img src="assets/shots/search.webp" width="644" height="1400" loading="lazy" decoding="async" alt=""
-                class="w-full rounded-[1.7rem]">
-            </button>
-            <p class="mt-3.5 px-1 text-sm font-medium text-ink-soft">Search everything you’ve kept</p>
           </li>
         </ul>
       </div>
@@ -583,12 +583,13 @@
 
               <figure class="relative rounded-xl border border-line bg-card p-4 shadow-lift sm:p-5">
                 <img src="assets/album-photo.webp" width="880" height="553" loading="lazy" decoding="async"
-                  alt="A printed page mock-up: a photograph of sunlit lemon-tree leaves above a handwritten-style caption."
+                  alt="A printed page mock-up: a photograph of a waterfall above a caption reading The road east."
                   class="aspect-3/2 w-full rounded-md object-cover">
                 <figcaption class="pt-5">
-                  <p class="font-display text-lg font-semibold tracking-tight">Sunday at the Park</p>
+                  <p class="font-display text-lg font-semibold tracking-tight">The road east</p>
                   <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">
-                    Today was one of those days I don’t want to forget. We were chasing pigeons for a full hour…
+                    Pulled over three times in an hour because the light kept changing on us. The falls are loud
+                    enough that you stop trying to talk…
                   </p>
                 </figcaption>
                 <div class="mt-5 flex items-baseline justify-between border-t border-line-soft pt-4">
