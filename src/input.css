@@ -1,0 +1,320 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Memoires — Design tokens
+   Style: warm editorial paper. Photography supplies the colour;
+   the page stays a neutral warm ground so screenshots never
+   compete with the brand.
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --paper: #FBF8F3;
+    --paper-deep: #F3ECE1;
+    --card: #FFFFFF;
+    --line: #E7DDCE;
+    --line-soft: #F0E7DA;
+
+    /* Text — warm near-black, never pure #000 on cream */
+    --ink: #1F1B16;        /* 16.2:1 on paper */
+    --ink-soft: #5A5047;   /*  7.4:1 on paper */
+
+    /* Accent — two tiers.
+       amber       = text-safe  (5.6:1 on paper)
+       amber-glow  = DECORATIVE ONLY (2.8:1) — fills, rules, glows. Never text. */
+    --amber: #8A5A22;
+    --amber-glow: #C08A4E;
+
+    /* Inverted panel (privacy section) */
+    --deep: #221C17;
+    --deep-ink: #F5EFE7;
+    --deep-ink-soft: #B3A697;
+
+    --shadow-lift: 0 1px 2px rgb(31 27 22 / 0.04), 0 12px 32px -8px rgb(31 27 22 / 0.10);
+    --shadow-hover: 0 2px 4px rgb(31 27 22 / 0.05), 0 20px 44px -12px rgb(31 27 22 / 0.18);
+    --shadow-phone: 0 2px 8px rgb(31 27 22 / 0.06), 0 32px 64px -16px rgb(31 27 22 / 0.22);
+
+    /* Motion. The built-in CSS easings are too weak to read as intentional;
+       these are the stronger variants. `ease-in` is deliberately absent —
+       it delays the first frame, which is exactly where the eye is. */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #171310;
+      --paper-deep: #201A15;
+      --card: #211B16;
+      --line: #332B23;
+      --line-soft: #2A231D;
+
+      --ink: #F5EFE7;        /* 16.2:1 on paper */
+      --ink-soft: #B0A498;   /*  7.6:1 on paper */
+
+      --amber: #E0A868;      /*  8.8:1 on paper */
+      --amber-glow: #C08A4E;
+
+      --deep: #100D0B;
+      --deep-ink: #F5EFE7;
+      --deep-ink-soft: #B3A697;
+
+      --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -8px rgb(0 0 0 / 0.5);
+      --shadow-hover: 0 2px 4px rgb(0 0 0 / 0.5), 0 20px 44px -12px rgb(0 0 0 / 0.65);
+      --shadow-phone: 0 2px 8px rgb(0 0 0 / 0.5), 0 32px 64px -16px rgb(0 0 0 / 0.7);
+    }
+  }
+
+  html {
+    /* Tells the UA to theme scrollbars, form controls and the overscroll
+       gutter to match. Without it those stay light on a dark page. */
+    color-scheme: light dark;
+    scroll-behavior: smooth;
+    /* Sticky nav must not cover anchor targets */
+    scroll-padding-top: 5.5rem;
+    /* Reserve the scrollbar so locking scroll for the modal shifts nothing */
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Scroll lock while the modal is open. */
+  body.is-locked {
+    overflow: hidden;
+  }
+
+  /* Removes the 300ms double-tap-zoom wait on everything tappable, and
+     replaces the default grey flash with our own :active feedback. */
+  a,
+  button,
+  summary,
+  [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* The page is viewport-fit=cover, so it paints under the notch and the
+     home indicator. `.gutter` keeps content clear of both without shrinking
+     the full-bleed section backgrounds. */
+  .gutter {
+    padding-inline: max(1.25rem, env(safe-area-inset-left), env(safe-area-inset-right));
+  }
+
+  @media (min-width: 40rem) {
+    .gutter {
+      padding-inline: max(2rem, env(safe-area-inset-left), env(safe-area-inset-right));
+    }
+  }
+
+  /* Newsreader carries an optical-size axis (6–72). Leaving optical sizing
+     on `auto` lets the browser track it to the rendered size, so display
+     headlines stay elegant and 18–20px subheads stay sturdy — no fixed
+     font-variation-settings, which would freeze one design for both. */
+  .font-display {
+    font-optical-sizing: auto;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--amber-glow) 30%, transparent);
+    color: var(--ink);
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-amber: var(--amber);
+  --color-amber-glow: var(--amber-glow);
+  --color-deep: var(--deep);
+  --color-deep-ink: var(--deep-ink);
+  --color-deep-ink-soft: var(--deep-ink-soft);
+
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --shadow-lift: var(--shadow-lift);
+  --shadow-phone: var(--shadow-phone);
+}
+
+@layer components {
+  /* Paper grain — sits above surfaces, below content, never intercepts clicks */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .grain::after { opacity: 0.06; }
+  }
+
+  /* Scroll reveal. Elements start visible and are hidden by JS only when
+     it is safe to animate them — so no-JS and reduced-motion users always
+     get the final readable state.
+
+     520ms with 14px of travel: this is explanatory pacing, not a UI
+     response, so it can run past the 300ms UI budget — but 700ms/20px
+     read as sluggish, and the shorter distance is what makes it "soft". */
+  .js-reveal [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  .js-reveal [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 520ms var(--ease-out),
+      transform 520ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* Hover lift for cards.
+     The shadow lives on a pseudo-element so the hover animates opacity
+     instead of box-shadow — box-shadow repaints, opacity composites.
+     Gated behind a real pointer: on touch, :hover latches after a tap. */
+  .lift {
+    position: relative;
+    transition:
+      transform 200ms var(--ease-out),
+      border-color 200ms ease;
+  }
+
+  /* The reveal owns `transform` on these same cards, and its settled rule
+     (`transform: none`) outranks `.lift:hover`. The reveal is a one-shot, so
+     the JS strips its hooks once it has played and hands `transform` back. */
+
+  .lift::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: var(--shadow-hover);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lift:hover { transform: translateY(-3px); }
+    .lift:hover::before { opacity: 1; }
+  }
+
+  /* Press feedback on the pressable lifts. Declared after :hover so a press
+     wins while the pointer is still over the element, and faster than the
+     hover — the system responds immediately, it only settles slowly. */
+  [data-lightbox]:active {
+    transform: scale(0.98);
+    transition-duration: 120ms;
+  }
+
+  /* Screenshot lightbox.
+     Enter 280ms / exit 190ms — the system should get out of the way faster
+     than it arrives. transform-origin stays centred: a modal is not
+     anchored to its trigger the way a popover is. */
+  .lightbox {
+    margin: auto;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    /* The screenshots have a fixed 644:1400 ratio, so capping the width by
+       viewport height too keeps the whole phone on screen instead of letting
+       max-height crop it. 40vh ≈ 87vh once the ratio is applied. */
+    width: min(92vw, 22rem, 40vh);
+    overflow: visible;
+    /* Stops a scroll gesture inside the modal chaining to the page behind */
+    overscroll-behavior: contain;
+
+    opacity: 0;
+    transform: scale(0.97);
+    transition:
+      opacity 190ms var(--ease-out),
+      transform 190ms var(--ease-out),
+      display 190ms allow-discrete,
+      overlay 190ms allow-discrete;
+  }
+
+  .lightbox[open] {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 280ms var(--ease-out),
+      transform 280ms var(--ease-out),
+      display 280ms allow-discrete,
+      overlay 280ms allow-discrete;
+  }
+
+  /* Never from scale(0) — things do not appear out of nothing. */
+  @starting-style {
+    .lightbox[open] {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+
+  .lightbox::backdrop {
+    background: rgb(20 16 13 / 0.55);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition:
+      opacity 190ms var(--ease-out),
+      display 190ms allow-discrete,
+      overlay 190ms allow-discrete;
+  }
+
+  .lightbox[open]::backdrop {
+    opacity: 1;
+    transition:
+      opacity 280ms var(--ease-out),
+      display 280ms allow-discrete,
+      overlay 280ms allow-discrete;
+  }
+
+  @starting-style {
+    .lightbox[open]::backdrop { opacity: 0; }
+  }
+
+  /* Reduced motion means fewer and gentler animations, not none: opacity
+     still carries the state change, movement and scaling are dropped. */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js-reveal [data-reveal] { opacity: 1; transform: none; }
+    .js-reveal [data-reveal].is-in { transition: none; }
+    .lift:hover { transform: none; }
+    .lightbox,
+    .lightbox[open] { transform: none; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+
+  /* Horizontal screenshot rail: native scrolling, so it stays keyboard-
+     and screen-reader accessible without carousel JS. */
+  .rail {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .rail::-webkit-scrollbar { display: none; }
+}
