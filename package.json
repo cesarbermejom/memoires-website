@@ -5,7 +5,8 @@
   "description": "Landing page for Memoires, an iPhone journalling app.",
   "scripts": {
     "dev": "tailwindcss -i src/input.css -o assets/tailwind.css --watch",
-    "build": "tailwindcss -i src/input.css -o assets/tailwind.css --minify"
+    "build": "tailwindcss -i src/input.css -o assets/tailwind.css --minify && node scripts/check-legal.mjs",
+    "check:legal": "node scripts/check-legal.mjs"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
