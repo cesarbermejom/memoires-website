@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="128 104 512 512" fill="none">
+  <title>Memoires — pages and bookmark</title>
+  <style>g{fill:#171C20}.paper{fill:#F6F4EF}@media(prefers-color-scheme:dark){g{fill:#F6F4EF}.paper{fill:#11161B}}</style><rect class="paper" x="128" y="104" width="512" height="512"/><g fill="#171C20">
+    <path d="M223 260C223 247 230 241 244 244C300 254 376 289 376 337V511C376 514 374 515 372 512C335 481 286 464 238 455C228 453 223 449 223 439Z"/>
+    <path d="M545 208C521 240 468 259 430 282C407 296 390 313 389 334C413 330 427 344 427 366V503C427 506 428 507 431 505C461 483 497 467 532 453C541 449 546 443 546 433V210C546 207 546 207 545 208Z"/>
+  </g>
+  <path fill="#DBA439" d="M389 334C400 333 410 337 415 346V413L402 399L389 413Z"/>
+</svg>
