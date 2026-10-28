@@ -92,6 +92,12 @@
   });
 
   const choice = read();
-  if (choice === "granted") loadAnalytics();
-  else if (choice !== "denied") showBanner();
+  if (choice === "granted") {
+    loadAnalytics();
+  } else {
+    // gtag.js rewrites _ga_<ID> while the page unloads after a withdrawal, so
+    // clear the cookies again on every load without consent.
+    clearAnalyticsCookies();
+    if (choice !== "denied") showBanner();
+  }
 })();
