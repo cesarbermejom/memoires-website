@@ -1,211 +1,596 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Privacy Policy — Memoires</title>
+    <meta
+      name="description"
+      content="What Memoires stores on your device, the one thing that leaves it, and what you can switch off."
+    />
+    <meta
+      name="theme-color"
+      content="#FBF8F3"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#171310"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="canonical" href="https://memoires.app/privacy/" />
+    <meta name="robots" content="index, follow" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Privacy Policy — Memoires</title>
-  <meta name="description" content="What Memoires stores on your device, the one thing that leaves it, and what you can switch off.">
-  <meta name="theme-color" content="#FBF8F3" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#171310" media="(prefers-color-scheme: dark)">
-  <link rel="canonical" href="https://memoires.app/privacy/">
-  <meta name="robots" content="index, follow">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets/favicon-32x32.png?v=20260909"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/favicon-16x16.png?v=20260909"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../assets/favicon.svg?v=20260909"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../assets/apple-touch-icon.png?v=20260909"
+    />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png?v=20260909">
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png?v=20260909">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=20260909">
-  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png?v=20260909">
+    <meta property="og:title" content="Privacy Policy — Memoires" />
+    <meta
+      property="og:description"
+      content="What Memoires stores on your device, the one thing that leaves it, and what you can switch off."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://memoires.app/privacy/" />
 
-  <meta property="og:title" content="Privacy Policy — Memoires">
-  <meta property="og:description" content="What Memoires stores on your device, the one thing that leaves it, and what you can switch off.">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://memoires.app/privacy/">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/tailwind.css" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="../assets/tailwind.css">
+    <!-- Google Analytics, loaded only after cookie consent -->
+    <script src="../assets/consent.js?v=20261028" defer></script>
+  </head>
 
-  <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://analytics.jumptozero.com/js/pa-GdxtH_h3EF7qFcxgc7gUv.js"></script>
-  <script>
-    window.plausible = window.plausible || function () { (plausible.q = plausible.q || []).push(arguments) }, plausible.init = plausible.init || function (i) { plausible.o = i || {} };
-    plausible.init()
-  </script>
-</head>
+  <body class="font-sans bg-paper text-ink antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-paper"
+    >
+      Skip to content
+    </a>
 
-<body class="font-sans bg-paper text-ink antialiased">
-
-  <a href="#main"
-    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-paper">
-    Skip to content
-  </a>
-
-  <header
-    class="sticky top-0 z-50 border-b border-line/70 bg-paper/95 backdrop-blur-xl supports-[backdrop-filter]:bg-paper/88">
-    <nav aria-label="Main" class="mx-auto flex h-16 max-w-6xl items-center justify-between gutter md:h-20">
-      <a href="/" class="group flex min-h-11 items-center gap-2.5">
-        <picture class="shrink-0">
-          <source media="(prefers-color-scheme: dark)" srcset="../assets/appicon-dark-192.webp?v=20260909">
-          <img src="../assets/appicon-192.webp?v=20260909" alt="" width="36" height="36" class="h-8 w-8 rounded-[9px] md:h-9 md:w-9">
-        </picture>
-        <span translate="no" class="font-display text-xl font-semibold tracking-tight md:text-2xl">Memoires</span>
-      </a>
-
-      <a href="/"
-        class="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line bg-card px-4 py-2.5 text-sm font-semibold text-ink transition-[transform,opacity] duration-200 hover:border-amber-glow hover:opacity-90 active:scale-[0.97] sm:px-5">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-          stroke-linejoin="round" aria-hidden="true" class="h-4 w-4">
-          <path d="M19 12H5M12 19l-7-7 7-7" />
-        </svg>
-        Back to home
-      </a>
-    </nav>
-  </header>
-
-  <main id="main" class="gutter pb-24 pt-14 md:pb-32 md:pt-20">
-    <div class="mx-auto max-w-2xl">
-
-      <p class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber">Legal</p>
-      <h1 class="font-display text-4xl leading-[1.1] font-medium tracking-[-0.025em] text-balance sm:text-5xl">Privacy Policy</h1>
-      <p class="mt-5 text-sm text-ink-soft">Last updated: September 7, 2026</p>
-
-      <div class="legal mt-14">
-
-        <h2>Your Privacy Matters</h2>
-        <p>Memoires is a personal journal app. Your memories are yours. Your entries, photos, and location tags are stored on your device and are never sold, shared, or used for advertising. This page explains exactly what stays on your device, what leaves it, and what you can turn off.</p>
-
-        <h2>What Stays on Your Device</h2>
-
-        <h3>On-Device Storage</h3>
-        <p>All journal entries, photos, drawings, mood data, and location tags are stored locally on your device using Apple's SwiftData framework. This data never leaves your device unless you explicitly enable iCloud Sync.</p>
-
-        <h3>iCloud Sync (Optional)</h3>
-        <p>If you enable iCloud Sync, your data is stored in your personal iCloud account using Apple's CloudKit private database, and synced between your own devices through your Apple ID. Memoires cannot read it.</p>
-        <p>Your iCloud data is encrypted in transit and at rest. However, unless you have enabled Apple's <a href="https://support.apple.com/en-us/102651" target="_blank" rel="noopener">Advanced Data Protection</a>, Apple holds the encryption keys. <strong>Memoires does not offer end-to-end encryption</strong>, and we want to be straightforward about that.</p>
-
-        <h3>App Lock</h3>
-        <p>If you enable App Lock, Memoires requires Face ID, Touch ID, or your device passcode to open. Authentication is handled entirely by iOS. Your biometric data never leaves Apple's Secure Enclave and is never accessible to Memoires.</p>
-
-        <h3>Exporting an Entry</h3>
-        <p>You can export a single entry as a PDF or as plain text. The file is created on your device and handed to the standard iOS share sheet. Nothing is sent to us, and the export never passes through our servers. Once you share the file, where it goes is between you and whichever app or person you send it to.</p>
-
-        <h2>What Leaves Your Device</h2>
-
-        <h3>Refine with AI (Premium)</h3>
-        <p>This is the only feature that sends your journal text off your device, and it only happens when you explicitly tap <strong>Refine with AI</strong> on a specific entry.</p>
-        <p>When you do, the text of that one entry is sent over an encrypted connection to our processing service, and from there to <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI</a>, which returns a cleaned-up version. Specifically:</p>
-        <ul>
-        <li>Only the text of the entry you are refining is sent. No other entries, photos, locations, or titles.</li>
-        <li>The request includes an anonymous subscriber identifier, so we can confirm your subscription and apply daily usage limits. It is not your name, email, or Apple ID.</li>
-        <li>We do not store the text of your entry on our servers. We do keep a count of how many times the feature has been used, linked to that anonymous identifier, to enforce those limits.</li>
-        <li>Under <a href="https://openai.com/policies/api-data-usage-policies" target="_blank" rel="noopener">OpenAI's API data usage policies</a>, text submitted through their API is not used to train their models. OpenAI may retain it for a limited period for abuse monitoring, under their own privacy policy.</li>
-        </ul>
-        <p>If you never tap the button, your journal text never leaves your device.</p>
-        <p>The refined version is <strong>generated by an AI model, not written by a person</strong>. It can misread what you meant, change your emphasis, or state something you did not write. When it comes back it replaces the text in the editor straight away, and an Undo option appears for about eight seconds before it disappears; after that the earlier wording is gone unless you saved it yourself. Read the result before you move on. Both what you wrote and what comes back are yours.</p>
-
-        <h3>Voice Dictation</h3>
-        <p>Dictation is processed <strong>on your device</strong> whenever the language you have selected supports on-device recognition, which is the case for most supported languages.</p>
-        <p>For languages without on-device support, iOS sends the audio to Apple's speech-recognition service for transcription, under <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's privacy policy</a>. Memoires never receives, records, or stores the audio itself — only the text that comes back. You can see and change which language is used in Settings and in the editor.</p>
-
-        <h3>Anonymous Usage Statistics</h3>
-        <p>We use <a href="https://telemetrydeck.com/privacy/" target="_blank" rel="noopener">TelemetryDeck</a>, a privacy-focused analytics service, to understand how Memoires is used — which screens are opened, whether a feature was used, roughly how long a dictation ran.</p>
-        <ul>
-        <li>These events <strong>never</strong> include your journal text, entry titles, place names, or coordinates. Only counts, yes/no flags, and rough ranges.</li>
-        <li>TelemetryDeck uses a hashed identifier that cannot be traced back to you or followed across other apps.</li>
-        <li>Nothing here is used for advertising, and we do not track you across apps or websites.</li>
-        <li><strong>You can turn this off entirely</strong> in Settings &rarr; Privacy and security &rarr; Analytics &rarr; Share anonymous usage.</li>
-        </ul>
-
-        <h3>Subscriptions</h3>
-        <p>Subscriptions are processed by Apple. We use <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat</a> to manage them, which receives your purchase receipts, subscription status, and an anonymous app user ID. RevenueCat has no access to your journal entries, photos, or location data. We never see your payment details.</p>
-
-        <h3>Device Integrity</h3>
-        <p>To stop our AI service being abused, Memoires uses Apple's App Attest to confirm requests come from a genuine, unmodified copy of the app. This exchanges a cryptographic token with Apple and our server. It contains no personal information and cannot identify you.</p>
-
-        <h2>Permissions We Request</h2>
-
-        <h3>Microphone &amp; Speech Recognition</h3>
-        <p>Used for voice dictation. See <em>Voice Dictation</em> above for exactly where the audio goes.</p>
-
-        <h3>Photo Library</h3>
-        <p>Used to attach photos to entries, and to look for unlogged trips and events so we can suggest writing about them. This scanning runs <strong>entirely on your device</strong>, including when it runs in the background, and thumbnail copies are stored locally. <strong>Your photos are never uploaded to us or to anyone else.</strong></p>
-
-        <h3>Camera</h3>
-        <p>Used to take photos directly within the app. They are stored locally on your device.</p>
-
-        <h3>Location</h3>
-        <p>Used to auto-tag where an entry took place. Location is stored only inside that entry on your device. We do not track your location in the background and <strong>never transmit it to any server</strong>.</p>
-
-        <h3>Face ID</h3>
-        <p>Used only to unlock the app when you have enabled App Lock. See <em>App Lock</em> above.</p>
-
-        <h3>Notifications</h3>
-        <p>Used for optional daily journaling reminders, and to tell you when a background scan has found photos worth writing about. Notifications are scheduled locally on your device. Memoires does not use push notifications and sends nothing to a server to deliver them.</p>
-
-        <h2>What We Do Not Do</h2>
-        <ul>
-        <li>We do not display advertisements, and no data is ever used for advertising.</li>
-        <li>We do not sell, share, or trade your personal data with anyone.</li>
-        <li>We do not track you across other apps or websites.</li>
-        <li>We do not build behavioural profiles about you.</li>
-        <li>We do not upload your photos, locations, or entries — apart from the single case of Refine with AI, described above, which you trigger yourself.</li>
-        </ul>
-
-        <h2>This Website</h2>
-        <p>memoires.app uses <a href="https://plausible.io/privacy-focused-web-analytics" target="_blank" rel="noopener">Plausible Analytics</a>, a privacy-friendly, cookieless analytics tool, to count page visits. It sets no cookies, collects no personal data, and does not track visitors across sites.</p>
-
-        <h2>Data Retention</h2>
-        <p>Your entries stay on your device — and in your personal iCloud account if sync is enabled — until you delete them. Archiving a memory is not deleting it: the entry is hidden from your timeline but kept, and you can read, restore, or delete it under Settings &rarr; Archive. Deleting a memory removes it permanently. Uninstalling the app removes all local data. To remove synced data, delete the app's data from your iCloud settings.</p>
-
-        <h2>Children's Privacy</h2>
-        <p>Memoires is not directed at children under the age of 16. We do not knowingly collect personal information from children.</p>
-
-        <h2>Changes to This Policy</h2>
-        <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated date. We encourage you to review it periodically.</p>
-
-        <h2>Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy or how your data is handled, please contact us at:</p>
-        <p><a href="mailto:privacy@memoires.app">privacy@memoires.app</a></p>
-      </div>
-
-    </div>
-  </main>
-
-  <footer class="border-t border-line gutter pt-12 pb-[max(3rem,env(safe-area-inset-bottom))]">
-    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row md:items-start">
-      <div class="text-center md:text-left">
-        <div class="flex items-center justify-center gap-2.5 md:justify-start">
+    <header
+      class="sticky top-0 z-50 border-b border-line/70 bg-paper/95 backdrop-blur-xl supports-[backdrop-filter]:bg-paper/88"
+    >
+      <nav
+        aria-label="Main"
+        class="mx-auto flex h-16 max-w-6xl items-center justify-between gutter md:h-20"
+      >
+        <a href="/" class="group flex min-h-11 items-center gap-2.5">
           <picture class="shrink-0">
-          <source media="(prefers-color-scheme: dark)" srcset="../assets/appicon-dark-192.webp?v=20260909">
-          <img src="../assets/appicon-192.webp?v=20260909" alt="" width="32" height="32" class="h-7 w-7 rounded-lg">
-        </picture>
-          <span translate="no" class="font-display text-lg font-semibold tracking-tight">Memoires</span>
+            <source
+              media="(prefers-color-scheme: dark)"
+              srcset="../assets/appicon-dark-192.webp?v=20260909"
+            />
+            <img
+              src="../assets/appicon-192.webp?v=20260909"
+              alt=""
+              width="36"
+              height="36"
+              class="h-8 w-8 rounded-[9px] md:h-9 md:w-9"
+            />
+          </picture>
+          <span
+            translate="no"
+            class="font-display text-xl font-semibold tracking-tight md:text-2xl"
+            >Memoires</span
+          >
+        </a>
+
+        <a
+          href="/"
+          class="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line bg-card px-4 py-2.5 text-sm font-semibold text-ink transition-[transform,opacity] duration-200 hover:border-amber-glow hover:opacity-90 active:scale-[0.97] sm:px-5"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            class="h-4 w-4"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Back to home
+        </a>
+      </nav>
+    </header>
+
+    <main id="main" class="gutter pb-24 pt-14 md:pb-32 md:pt-20">
+      <div class="mx-auto max-w-2xl">
+        <p
+          class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-amber"
+        >
+          Legal
+        </p>
+        <h1
+          class="font-display text-4xl leading-[1.1] font-medium tracking-[-0.025em] text-balance sm:text-5xl"
+        >
+          Privacy Policy
+        </h1>
+        <p class="mt-5 text-sm text-ink-soft">
+          Last updated: October 28, 2026
+        </p>
+
+        <div class="legal mt-14">
+          <h2>Your Privacy Matters</h2>
+          <p>
+            Memoires is a personal journal app. Your memories are yours. Your
+            entries, photos, and location tags are stored on your device and are
+            never sold, shared, or used for advertising. This page explains
+            exactly what stays on your device, what leaves it, and what you can
+            turn off.
+          </p>
+          <p>
+            This policy covers two separate things: the
+            <strong>Memoires iPhone app</strong>, described in every section
+            below except one, and the <strong>memoires.app website</strong>,
+            described in <a href="#website">The memoires.app Website</a>. They
+            work differently. Google Analytics runs only on the website. It is
+            not part of the app, and nothing from the app is ever sent to Google.
+          </p>
+
+          <h2>What Stays on Your Device</h2>
+
+          <h3>On-Device Storage</h3>
+          <p>
+            All journal entries, photos, drawings, mood data, and location tags
+            are stored locally on your device using Apple's SwiftData framework.
+            This data never leaves your device unless you explicitly enable
+            iCloud Sync.
+          </p>
+
+          <h3>iCloud Sync (Optional)</h3>
+          <p>
+            If you enable iCloud Sync, your data is stored in your personal
+            iCloud account using Apple's CloudKit private database, and synced
+            between your own devices through your Apple ID. Memoires cannot read
+            it.
+          </p>
+          <p>
+            Your iCloud data is encrypted in transit and at rest. However,
+            unless you have enabled Apple's
+            <a
+              href="https://support.apple.com/en-us/102651"
+              target="_blank"
+              rel="noopener"
+              >Advanced Data Protection</a
+            >, Apple holds the encryption keys.
+            <strong>Memoires does not offer end-to-end encryption</strong>, and
+            we want to be straightforward about that.
+          </p>
+
+          <h3>App Lock</h3>
+          <p>
+            If you enable App Lock, Memoires requires Face ID, Touch ID, or your
+            device passcode to open. Authentication is handled entirely by iOS.
+            Your biometric data never leaves Apple's Secure Enclave and is never
+            accessible to Memoires.
+          </p>
+
+          <h3>Exporting an Entry</h3>
+          <p>
+            You can export a single entry as a PDF or as plain text. The file is
+            created on your device and handed to the standard iOS share sheet.
+            Nothing is sent to us, and the export never passes through our
+            servers. Once you share the file, where it goes is between you and
+            whichever app or person you send it to.
+          </p>
+
+          <h2>What Leaves Your Device</h2>
+
+          <h3>Refine with AI (Premium)</h3>
+          <p>
+            This is the only feature that sends your journal text off your
+            device, and it only happens when you explicitly tap
+            <strong>Refine with AI</strong> on a specific entry.
+          </p>
+          <p>
+            When you do, the text of that one entry is sent over an encrypted
+            connection to our processing service, and from there to
+            <a
+              href="https://openai.com/policies/privacy-policy"
+              target="_blank"
+              rel="noopener"
+              >OpenAI</a
+            >, which returns a cleaned-up version. Specifically:
+          </p>
+          <ul>
+            <li>
+              Only the text of the entry you are refining is sent. No other
+              entries, photos, locations, or titles.
+            </li>
+            <li>
+              The request includes an anonymous subscriber identifier, so we can
+              confirm your subscription and apply daily usage limits. It is not
+              your name, email, or Apple ID.
+            </li>
+            <li>
+              We do not store the text of your entry on our servers. We do keep
+              a count of how many times the feature has been used, linked to
+              that anonymous identifier, to enforce those limits.
+            </li>
+            <li>
+              Under
+              <a
+                href="https://openai.com/policies/api-data-usage-policies"
+                target="_blank"
+                rel="noopener"
+                >OpenAI's API data usage policies</a
+              >, text submitted through their API is not used to train their
+              models. OpenAI may retain it for a limited period for abuse
+              monitoring, under their own privacy policy.
+            </li>
+          </ul>
+          <p>
+            If you never tap the button, your journal text never leaves your
+            device.
+          </p>
+          <p>
+            The refined version is
+            <strong>generated by an AI model, not written by a person</strong>.
+            It can misread what you meant, change your emphasis, or state
+            something you did not write. When it comes back it replaces the text
+            in the editor straight away, and an Undo option appears for about
+            eight seconds before it disappears; after that the earlier wording
+            is gone unless you saved it yourself. Read the result before you
+            move on. Both what you wrote and what comes back are yours.
+          </p>
+
+          <h3>Voice Dictation</h3>
+          <p>
+            Dictation is processed <strong>on your device</strong> whenever the
+            language you have selected supports on-device recognition, which is
+            the case for most supported languages.
+          </p>
+          <p>
+            For languages without on-device support, iOS sends the audio to
+            Apple's speech-recognition service for transcription, under
+            <a
+              href="https://www.apple.com/legal/privacy/"
+              target="_blank"
+              rel="noopener"
+              >Apple's privacy policy</a
+            >. Memoires never receives, records, or stores the audio itself —
+            only the text that comes back. You can see and change which language
+            is used in Settings and in the editor.
+          </p>
+
+          <h3>Anonymous Usage Statistics</h3>
+          <p>
+            We use
+            <a
+              href="https://telemetrydeck.com/privacy/"
+              target="_blank"
+              rel="noopener"
+              >TelemetryDeck</a
+            >, a privacy-focused analytics service, to understand how Memoires
+            is used — which screens are opened, whether a feature was used,
+            roughly how long a dictation ran.
+          </p>
+          <ul>
+            <li>
+              These events <strong>never</strong> include your journal text,
+              entry titles, place names, or coordinates. Only counts, yes/no
+              flags, rough ranges, and app details such as the screen name, the
+              dictation language, or the plan you picked.
+            </li>
+            <li>
+              TelemetryDeck uses a hashed identifier that cannot be traced back
+              to you or followed across other apps.
+            </li>
+            <li>
+              Nothing here is used for advertising, and we do not track you
+              across apps or websites.
+            </li>
+            <li>
+              <strong>You can turn this off entirely</strong> in Settings &rarr;
+              Privacy and security &rarr; Analytics &rarr; Share anonymous
+              usage.
+            </li>
+          </ul>
+
+          <h3>Subscriptions</h3>
+          <p>
+            Subscriptions are processed by Apple. We use
+            <a
+              href="https://www.revenuecat.com/privacy"
+              target="_blank"
+              rel="noopener"
+              >RevenueCat</a
+            >
+            to manage them, which receives your purchase receipts, subscription
+            status, and an anonymous app user ID. RevenueCat has no access to
+            your journal entries, photos, or location data. We never see your
+            payment details.
+          </p>
+
+          <h3>Device Integrity</h3>
+          <p>
+            To stop our AI service being abused, Memoires uses Apple's App
+            Attest to confirm requests come from a genuine, unmodified copy of
+            the app. This exchanges a cryptographic token with Apple and our
+            server. It contains no personal information and cannot identify you.
+          </p>
+
+          <h2>Permissions We Request</h2>
+
+          <h3>Microphone &amp; Speech Recognition</h3>
+          <p>
+            Used for voice dictation. See <em>Voice Dictation</em> above for
+            exactly where the audio goes.
+          </p>
+
+          <h3>Photo Library</h3>
+          <p>
+            Used to attach photos to entries, and to look for unlogged trips and
+            events so we can suggest writing about them. This scanning runs
+            <strong>entirely on your device</strong>, including when it runs in
+            the background, and thumbnail copies are stored locally.
+            <strong
+              >Your photos are never uploaded to us or to anyone else.</strong
+            >
+          </p>
+
+          <h3>Camera</h3>
+          <p>
+            Used to take photos directly within the app. They are stored locally
+            on your device.
+          </p>
+
+          <h3>Location</h3>
+          <p>
+            Used to auto-tag where an entry took place. Location is stored only
+            inside that entry on your device. We do not track your location in
+            the background and <strong>never transmit it to any server</strong>.
+          </p>
+
+          <h3>Face ID</h3>
+          <p>
+            Used only to unlock the app when you have enabled App Lock. See
+            <em>App Lock</em> above.
+          </p>
+
+          <h3>Notifications</h3>
+          <p>
+            Used for optional daily journaling reminders, and to tell you when a
+            background scan has found photos worth writing about. Notifications
+            are scheduled locally on your device. Memoires does not use push
+            notifications and sends nothing to a server to deliver them.
+          </p>
+
+          <h2>What the App Does Not Do</h2>
+          <ul>
+            <li>
+              We do not display advertisements, and no data is ever used for
+              advertising.
+            </li>
+            <li>
+              We do not sell, share, or trade your personal data with anyone.
+            </li>
+            <li>We do not track you across other apps or websites.</li>
+            <li>We do not build behavioural profiles about you.</li>
+            <li>
+              We do not upload your photos, locations, or entries — apart from
+              the single case of Refine with AI, described above, which you
+              trigger yourself.
+            </li>
+          </ul>
+
+          <h2 id="website">The memoires.app Website</h2>
+          <p>
+            This section applies only to the website at memoires.app, not to the
+            app. The website and the app do not share any data, and visiting
+            the website tells us nothing about whether or how you use the app.
+          </p>
+
+          <h3>Google Analytics</h3>
+          <p>
+            The website uses
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener"
+              >Google Analytics</a
+            >, provided by Google, to measure visits: which pages are viewed,
+            how visitors arrived (for example, from a search or a link), the
+            type of device and browser, and an approximate location at the
+            country or city level. Google Analytics does not log or store full
+            IP addresses.
+          </p>
+          <ul>
+            <li>
+              <strong>It only runs if you accept it</strong> in the cookie
+              banner. Until then, Google Analytics is not loaded and nothing is
+              sent to Google for it. You can change your answer at any time with
+              the <strong>Cookies</strong> link at the bottom of every page.
+              Your answer is remembered in your browser's local storage, which
+              is never sent anywhere.
+            </li>
+            <li>
+              Once accepted, it sets cookies in your browser (<code>_ga</code> and
+              <code>_ga_SZ75GLM4NL</code>) to tell a returning visitor from a new
+              one. They last up to two years.
+            </li>
+            <li>
+              Google processes this data on our behalf and may do so on servers
+              outside the European Union, including in the United States.
+            </li>
+            <li>
+              We keep the data for 14 months. We do not use Google's advertising
+              features or Google signals, and we do not combine it with any
+              other data.
+            </li>
+            <li>
+              You can also block or delete these cookies in your browser
+              settings, or install Google's
+              <a
+                href="https://tools.google.com/dlpage/gaoptout"
+                target="_blank"
+                rel="noopener"
+                >opt-out browser add-on</a
+              >. The website works the same without them.
+            </li>
+          </ul>
+
+          <h3>Fonts</h3>
+          <p>
+            The website loads its fonts from
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener"
+              >Google Fonts</a
+            >, so your browser connects to Google's servers, which receive your
+            IP address. No cookies are set for this.
+          </p>
+
+          <h2>Data Retention</h2>
+          <p>
+            Your entries stay on your device — and in your personal iCloud
+            account if sync is enabled — until you delete them. Archiving a
+            memory is not deleting it: the entry is hidden from your timeline
+            but kept, and you can read, restore, or delete it under Settings
+            &rarr; Archive. Deleting a memory removes it permanently.
+            Uninstalling the app removes all local data. To remove synced data,
+            delete the app's data from your iCloud settings.
+          </p>
+
+          <h2>Children's Privacy</h2>
+          <p>
+            Memoires is not directed at children under the age of 16. We do not
+            knowingly collect personal information from children.
+          </p>
+
+          <h2>Changes to This Policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. Any changes
+            will be reflected on this page with an updated date. We encourage
+            you to review it periodically.
+          </p>
+
+          <h2>Contact Us</h2>
+          <p>
+            If you have any questions about this Privacy Policy or how your data
+            is handled, please contact us at:
+          </p>
+          <p><a href="mailto:privacy@memoires.app">privacy@memoires.app</a></p>
         </div>
-        <p class="mt-3 text-sm text-ink-soft">A journal that starts where your photos are.</p>
+      </div>
+    </main>
+
+    <footer
+      class="border-t border-line gutter pt-12 pb-[max(3rem,env(safe-area-inset-bottom))]"
+    >
+      <div
+        class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row md:items-start"
+      >
+        <div class="text-center md:text-left">
+          <div
+            class="flex items-center justify-center gap-2.5 md:justify-start"
+          >
+            <picture class="shrink-0">
+              <source
+                media="(prefers-color-scheme: dark)"
+                srcset="../assets/appicon-dark-192.webp?v=20260909"
+              />
+              <img
+                src="../assets/appicon-192.webp?v=20260909"
+                alt=""
+                width="32"
+                height="32"
+                class="h-7 w-7 rounded-lg"
+              />
+            </picture>
+            <span
+              translate="no"
+              class="font-display text-lg font-semibold tracking-tight"
+              >Memoires</span
+            >
+          </div>
+          <p class="mt-3 text-sm text-ink-soft">
+            A journal that starts where your photos are.
+          </p>
+        </div>
+
+        <nav
+          aria-label="Footer"
+          class="flex flex-wrap items-center justify-center gap-x-7 gap-y-3"
+        >
+          <a
+            href="/#features"
+            class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
+            >Features</a
+          >
+          <a
+            href="/privacy/"
+            class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
+            >Privacy</a
+          >
+          <a
+            href="/terms/"
+            class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
+            >Terms</a
+          >
+          <button
+            type="button"
+            data-cookie-settings
+            class="cursor-pointer inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
+          >
+            Cookies
+          </button>
+          <a
+            href="mailto:hello@memoires.app"
+            class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
+            >Contact</a
+          >
+          <a
+            href="https://apps.apple.com/app/memoires/id6760226058"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-11 items-center text-sm font-medium text-amber transition-opacity duration-200 hover:opacity-80"
+            >App Store</a
+          >
+        </nav>
       </div>
 
-      <nav aria-label="Footer" class="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
-        <a href="/#features" class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Features</a>
-        <a href="/privacy/" class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Privacy</a>
-        <a href="/terms/" class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Terms</a>
-        <a href="mailto:hello@memoires.app"
-          class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink">Contact</a>
-        <a href="https://apps.apple.com/app/memoires/id6760226058" target="_blank" rel="noopener"
-          class="inline-flex min-h-11 items-center text-sm font-medium text-amber transition-opacity duration-200 hover:opacity-80">App Store</a>
-      </nav>
-    </div>
+      <p
+        class="mx-auto mt-10 max-w-6xl text-center text-xs text-ink-soft md:text-left"
+      >
+        &copy; <span id="year">2026</span> Memoires. Made for iPhone.
+      </p>
+    </footer>
 
-    <p class="mx-auto mt-10 max-w-6xl text-center text-xs text-ink-soft md:text-left">
-      &copy; <span id="year">2026</span> Memoires. Made for iPhone.
-    </p>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
