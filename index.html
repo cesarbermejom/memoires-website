@@ -1421,6 +1421,22 @@
       (function () {
         document.getElementById("year").textContent = new Date().getFullYear();
 
+        /* ---------- App Store campaign attribution ---------- */
+        // Carry the visit's utm_source into the App Store link as an App
+        // Analytics campaign (ct), so installs show up per source.
+        var campaigns = { tiktok: "Tiktok_organic", youtube: "Youtube_organic" };
+        var ct = campaigns[new URLSearchParams(location.search).get("utm_source")];
+        if (ct) {
+          document
+            .querySelectorAll('a[href^="https://apps.apple.com/app/memoires/id6760226058"]')
+            .forEach(function (a) {
+              a.href =
+                "https://apps.apple.com/app/apple-store/id6760226058?pt=125904115&ct=" +
+                ct +
+                "&mt=8";
+            });
+        }
+
         /* ---------- Screenshot lightbox ---------- */
         var dialog = document.querySelector(".lightbox");
         var dialogImg = document.getElementById("lightbox-img");
